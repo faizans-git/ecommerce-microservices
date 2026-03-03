@@ -1,6 +1,12 @@
-import logger from "../utils/logger";
+import logger from "../utils/logger.js";
+import type { Request, Response, NextFunction } from "express";
 
-const errorHandler = (error, req, res, next) => {
+const errorHandler = (
+  error: any,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   logger.error(error);
   const isProd = process.env.NODE_ENV === "production";
   res.status(error.status || 500).json({

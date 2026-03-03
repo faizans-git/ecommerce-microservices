@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
-import errorHandler from "./middlewares/errorHandler";
-import logger from "./utils/logger";
+import errorHandler from "./middlewares/errorHandler.js";
+import logger from "./utils/logger.js";
 
 config();
 
@@ -12,5 +12,5 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  logger(`Auth service runnning at ${PORT}`);
+  logger.info(`Auth service runnning at ${PORT}`);
 });
