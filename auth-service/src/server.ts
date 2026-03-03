@@ -13,4 +13,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   logger.info(`Auth service runnning at ${PORT}`);
+  console.log("Listening");
 });
