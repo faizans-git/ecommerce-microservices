@@ -2,11 +2,14 @@ import { validateRegistrationData } from "../requestDataValidators/validateData.
 import type { RegisterUserInputs } from "../types/auth.js";
 import logger from "../utils/logger.js";
 import type { Request, Response } from "express";
+import { hashPassword } from "../utils/password.js";
+import prisma from "../lib/prisma.js";
 
 const registerUser = async (req: Request, res: Response) => {
   logger.info("User registration endpoint hit.");
   try {
     const { error, value } = validateRegistrationData(req.body);
+
     if (error) {
       logger.warn("Validation error", error);
       return res.status(400).json({
@@ -14,7 +17,26 @@ const registerUser = async (req: Request, res: Response) => {
         message: "Input data is not according to schema",
       });
     }
+
     const { username, email, password }: RegisterUserInputs = value;
+    const hashedPassword: string = await hashPassword(password);
+
+    const createUser = await prisma.user.create({
+      data: {
+        username,
+        email,
+        password: hashedPassword,
+      },
+    });
+
+    if (!createUser) {
+      logger.error("Error during user registration");
+      return res.status(500).json({
+        success: false,
+        message: "Internal error occurred. Please try again later",
+      });
+    }
+
     return res.status(201).json({
       success: true,
       message: "User registered successfully",
