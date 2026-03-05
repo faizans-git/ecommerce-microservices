@@ -1,0 +1,5 @@
+{"level":"error","message":"User with these credentials already exists","service":"Api-gateway","timestamp":"2026-03-05T05:49:51.272Z"}
+{"error":{},"level":"error","message":"Error occured while user registration","service":"Api-gateway","timestamp":"2026-03-05T05:49:51.273Z"}
+{"level":"error","message":"User with these credentials already exists","service":"Api-gateway","timestamp":"2026-03-05T05:51:53.452Z"}
+{"level":"error","message":"User with these credentials already exists","service":"Api-gateway","timestamp":"2026-03-05T05:51:55.851Z"}
+{"error":{"clientVersion":"7.4.2","code":"P2000","meta":{"driverAdapterError":{"cause":{"kind":"LengthMismatch","originalCode":"22001","originalMessage":"value too long for type character varying(20)"},"name":"DriverAdapterError"},"modelName":"User"},"name":"PrismaClientKnownRequestError"},"level":"error","message":"Error occured while user registration","service":"Api-gateway","timestamp":"2026-03-05T07:41:19.856Z"}

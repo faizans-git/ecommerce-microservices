@@ -1,2 +1,109 @@
 {"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-03T07:19:43.091Z"}
 {"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-03T07:19:45.504Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-04T19:05:57.988Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-04T19:07:14.899Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-04T19:10:01.706Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-04T19:10:08.035Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:46:51.490Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:47:12.929Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:47:37.992Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:47:52.848Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:48:15.949Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:49:39.425Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-05T05:49:48.420Z"}
+{"level":"error","message":"User with these credentials already exists","service":"Api-gateway","timestamp":"2026-03-05T05:49:51.272Z"}
+{"error":{},"level":"error","message":"Error occured while user registration","service":"Api-gateway","timestamp":"2026-03-05T05:49:51.273Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:51:39.767Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-05T05:51:51.558Z"}
+{"level":"error","message":"User with these credentials already exists","service":"Api-gateway","timestamp":"2026-03-05T05:51:53.452Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-05T05:51:55.619Z"}
+{"level":"error","message":"User with these credentials already exists","service":"Api-gateway","timestamp":"2026-03-05T05:51:55.851Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-05T05:52:35.012Z"}
+{"level":"info","message":"Tokens generated for user cmmd1twk20000qignn0ow6r5l","service":"Api-gateway","timestamp":"2026-03-05T05:52:37.085Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:54:24.986Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:56:34.614Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:58:33.588Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T05:59:10.555Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:02:12.046Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:02:47.175Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:03:39.830Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:04:36.601Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:11:18.017Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:12:07.965Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:12:12.814Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:12:49.419Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:13:19.671Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:13:51.764Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:13:59.953Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:14:21.809Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:14:56.665Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:15:31.870Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:15:42.522Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:17:40.801Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:17:52.800Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:18:52.759Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:19:13.321Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:21:11.072Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:21:24.081Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:21:31.995Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:22:51.777Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:23:21.325Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:28:36.404Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:29:05.564Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:30:00.403Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:30:36.492Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:33:09.395Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:50:50.359Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:51:54.616Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T06:52:18.227Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:17:45.660Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:17:50.057Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:20:30.568Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:23:39.858Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:25:13.462Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:27:40.824Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:28:56.671Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:30:11.180Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:33:41.150Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:33:57.574Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:34:15.130Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:34:25.777Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:37:28.086Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:38:53.451Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-05T07:39:34.939Z"}
+{"_original":{"email":"frog1gfnfdmndmf7male@gmail.com","password":"meowmeow","username":"mebrfnenbndmsdmwlowmeow"},"details":[{"context":{"key":"username","label":"username","limit":20,"value":"mebrfnenbndmsdmwlowmeow"},"message":"\"username\" length must be less than or equal to 20 characters long","path":["username"],"type":"string.max"}],"level":"warn","message":"Validation error \"username\" length must be less than or equal to 20 characters long","service":"Api-gateway","stack":"ValidationError: \"username\" length must be less than or equal to 20 characters long","timestamp":"2026-03-05T07:39:34.944Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T07:41:08.490Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-05T07:41:16.460Z"}
+{"error":{"clientVersion":"7.4.2","code":"P2000","meta":{"driverAdapterError":{"cause":{"kind":"LengthMismatch","originalCode":"22001","originalMessage":"value too long for type character varying(20)"},"name":"DriverAdapterError"},"modelName":"User"},"name":"PrismaClientKnownRequestError"},"level":"error","message":"Error occured while user registration","service":"Api-gateway","timestamp":"2026-03-05T07:41:19.856Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T08:23:18.925Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-05T08:23:47.714Z"}
+{"level":"info","message":"Tokens generated for user cmmd78dvp0000s6gn4nia6fxf","service":"Api-gateway","timestamp":"2026-03-05T08:23:50.841Z"}
+{"level":"warn","message":"User login input is not according to schema ValidationError: \"email\" must be a valid email","service":"Api-gateway","timestamp":"2026-03-05T08:27:47.522Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T08:28:34.615Z"}
+{"level":"warn","message":"User login input is not according to schema ValidationError: \"email\" must be a valid email","service":"Api-gateway","timestamp":"2026-03-05T08:28:42.189Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T08:30:32.977Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-05T08:31:07.485Z"}
+{"level":"info","message":"Tokens generated for user cmmd7htcj0000z2gnnexh5zls","service":"Api-gateway","timestamp":"2026-03-05T08:31:10.799Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T08:32:03.170Z"}
+{"level":"warn","message":"User login input is not according to schema ValidationError: \"username\" is not allowed","service":"Api-gateway","timestamp":"2026-03-05T08:32:54.875Z"}
+{"level":"info","message":"Tokens generated for user cmmd7htcj0000z2gnnexh5zls","service":"Api-gateway","timestamp":"2026-03-05T08:33:09.803Z"}
+{"level":"info","message":"Tokens generated for user cmmd7htcj0000z2gnnexh5zls","service":"Api-gateway","timestamp":"2026-03-05T08:35:46.340Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T08:37:12.853Z"}
+{"level":"info","message":"Tokens generated for user cmmd7htcj0000z2gnnexh5zls","service":"Api-gateway","timestamp":"2026-03-05T08:37:17.726Z"}
+{"level":"info","message":"Tokens generated for user cmmd7htcj0000z2gnnexh5zls","service":"Api-gateway","timestamp":"2026-03-05T08:37:22.837Z"}
+{"level":"info","message":"Tokens generated for user cmmd7htcj0000z2gnnexh5zls","service":"Api-gateway","timestamp":"2026-03-05T08:37:28.344Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T09:50:11.509Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T09:54:42.981Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T09:56:31.435Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T09:57:05.151Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T09:59:15.929Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T10:01:01.217Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T10:02:08.525Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T10:02:33.397Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T10:05:09.052Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T10:09:42.867Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T10:12:09.268Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T10:13:20.983Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T10:13:29.178Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T10:13:46.630Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-05T10:16:10.682Z"}

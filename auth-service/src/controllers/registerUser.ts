@@ -4,6 +4,8 @@ import logger from "../utils/logger.js";
 import type { Request, Response } from "express";
 import { hashPassword } from "../utils/password.js";
 import prisma from "../lib/prisma.js";
+import generateTokens from "../lib/generateToken.js";
+import findUser from "../lib/checkExistance.js";
 
 const registerUser = async (req: Request, res: Response) => {
   logger.info("User registration endpoint hit.");
@@ -19,6 +21,16 @@ const registerUser = async (req: Request, res: Response) => {
     }
 
     const { username, email, password }: RegisterUserInputs = value;
+
+    const userExists = await findUser(email);
+    if (userExists) {
+      logger.error(`User with these credentials already exists: ${email}`);
+
+      return res
+        .status(409)
+        .json({ success: false, message: "Email already in use" });
+    }
+
     const hashedPassword: string = await hashPassword(password);
 
     const createUser = await prisma.user.create({
@@ -28,6 +40,8 @@ const registerUser = async (req: Request, res: Response) => {
         password: hashedPassword,
       },
     });
+
+    const token = generateTokens(createUser);
 
     if (!createUser) {
       logger.error("Error during user registration");
