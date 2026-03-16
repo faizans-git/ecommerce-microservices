@@ -54,12 +54,13 @@ const registerUser = async (req: Request, res: Response) => {
     return res.status(201).json({
       success: true,
       message: "User registered successfully",
+      token,
     });
   } catch (error) {
     logger.error("Error occured while user registration", { error });
     return res.status(500).json({
       success: false,
-      message: "An unknnown server error occurred",
+      message: "An unknown server error occurred",
     });
   }
 };

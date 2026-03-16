@@ -44,6 +44,18 @@ model RefreshToken{
   @@map("refresh_tokens")
 }
 
+model OTP{
+  id         String   @id @default(cuid())
+  userId     String
+  code       String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  
+
+}
+
 enum Role {
   USER
   ADMIN
