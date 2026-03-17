@@ -5,7 +5,7 @@ import { generateOtp, verifyOtp } from "../lib/otpFunctions.js";
 import { sendOtpEmail } from "../lib/emailService.js";
 export const verifyOtpController = async (req, res) => {
     try {
-        // convert to winston
+        // convert to joi
         const { email, otp } = req.body;
         if (!email || !otp) {
             return res.status(400).json({

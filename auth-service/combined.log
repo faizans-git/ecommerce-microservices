@@ -203,3 +203,33 @@
 {"level":"info","message":"Tokens generated for user cmmtjqugv0000vsgnt8orrdzc","service":"Api-gateway","timestamp":"2026-03-16T19:17:18.507Z"}
 {"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-16T19:19:33.822Z"}
 {"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-16T19:19:33.846Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:45:15.933Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:45:15.955Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:45:23.473Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:45:23.492Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:47:29.894Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:47:29.923Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:48:42.849Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:48:42.872Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:49:24.996Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:49:25.025Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:51:05.581Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:51:05.599Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:54:33.115Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:54:33.132Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:55:00.951Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:55:00.985Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:57:00.085Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:57:00.124Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:57:32.525Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:57:32.541Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:58:12.267Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:58:12.306Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T11:58:36.534Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T11:58:36.558Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T12:20:23.809Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T12:20:23.838Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T12:22:22.150Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T12:22:22.178Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T12:27:10.743Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T12:27:10.762Z"}

@@ -7,7 +7,7 @@ import { sendOtpEmail } from "../lib/emailService.js";
 
 export const verifyOtpController = async (req: Request, res: Response) => {
   try {
-    // convert to winston
+    // convert to joi
     const { email, otp }: { email: string; otp: string } = req.body;
 
     if (!email || !otp) {
