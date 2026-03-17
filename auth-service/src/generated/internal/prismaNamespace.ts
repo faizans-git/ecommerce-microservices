@@ -385,8 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  RefreshToken: 'RefreshToken',
-  OTP: 'OTP'
+  RefreshToken: 'RefreshToken'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -402,7 +401,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "refreshToken" | "oTP"
+    modelProps: "user" | "refreshToken"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -554,80 +553,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    OTP: {
-      payload: Prisma.$OTPPayload<ExtArgs>
-      fields: Prisma.OTPFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.OTPFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.OTPFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
-        }
-        findFirst: {
-          args: Prisma.OTPFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.OTPFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
-        }
-        findMany: {
-          args: Prisma.OTPFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>[]
-        }
-        create: {
-          args: Prisma.OTPCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
-        }
-        createMany: {
-          args: Prisma.OTPCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.OTPCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>[]
-        }
-        delete: {
-          args: Prisma.OTPDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
-        }
-        update: {
-          args: Prisma.OTPUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
-        }
-        deleteMany: {
-          args: Prisma.OTPDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.OTPUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.OTPUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>[]
-        }
-        upsert: {
-          args: Prisma.OTPUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
-        }
-        aggregate: {
-          args: Prisma.OTPAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateOTP>
-        }
-        groupBy: {
-          args: Prisma.OTPGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.OTPGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.OTPCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.OTPCountAggregateOutputType> | number
-        }
-      }
-    }
   }
 } & {
   other: {
@@ -671,6 +596,7 @@ export const UserScalarFieldEnum = {
   id: 'id',
   username: 'username',
   email: 'email',
+  isVerified: 'isVerified',
   password: 'password',
   role: 'role',
   firstName: 'firstName',
@@ -693,17 +619,6 @@ export const RefreshTokenScalarFieldEnum = {
 } as const
 
 export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
-
-
-export const OTPScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  code: 'code',
-  expiresAt: 'expiresAt',
-  createdAt: 'createdAt'
-} as const
-
-export type OTPScalarFieldEnum = (typeof OTPScalarFieldEnum)[keyof typeof OTPScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -747,6 +662,13 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'String[]'
  */
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -888,7 +810,6 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   refreshToken?: Prisma.RefreshTokenOmit
-  oTP?: Prisma.OTPOmit
 }
 
 /* Types for Logging */

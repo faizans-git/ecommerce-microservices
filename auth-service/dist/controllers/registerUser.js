@@ -2,8 +2,9 @@ import { validateRegistrationData } from "../requestDataValidators/validateData.
 import logger from "../utils/logger.js";
 import { hashPassword } from "../utils/password.js";
 import prisma from "../lib/prisma.js";
-import generateTokens from "../lib/generateToken.js";
 import findUser from "../lib/checkExistance.js";
+import { sendOtpEmail } from "../lib/emailService.js";
+import { generateOtp } from "../lib/otpFunctions.js";
 const registerUser = async (req, res) => {
     logger.info("User registration endpoint hit.");
     try {
@@ -24,21 +25,23 @@ const registerUser = async (req, res) => {
                 .json({ success: false, message: "Email already in use" });
         }
         const hashedPassword = await hashPassword(password);
-        const createUser = await prisma.user.create({
+        const createdUser = await prisma.user.create({
             data: {
                 username,
                 email,
                 password: hashedPassword,
             },
         });
-        const token = generateTokens(createUser);
-        if (!createUser) {
+        if (!createdUser) {
             logger.error("Error during user registration");
             return res.status(500).json({
                 success: false,
                 message: "Internal error occurred. Please try again later",
             });
         }
+        const otp = await generateOtp(createdUser.id);
+        sendOtpEmail(email, otp);
+        // DO something
         return res.status(201).json({
             success: true,
             message: "User registered successfully",
@@ -48,7 +51,7 @@ const registerUser = async (req, res) => {
         logger.error("Error occured while user registration", { error });
         return res.status(500).json({
             success: false,
-            message: "An unknnown server error occurred",
+            message: "An unknown server error occurred",
         });
     }
 };

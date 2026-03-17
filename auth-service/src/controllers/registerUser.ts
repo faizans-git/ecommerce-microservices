@@ -4,8 +4,9 @@ import logger from "../utils/logger.js";
 import type { Request, Response } from "express";
 import { hashPassword } from "../utils/password.js";
 import prisma from "../lib/prisma.js";
-import generateTokens from "../lib/generateToken.js";
 import findUser from "../lib/checkExistance.js";
+import { sendOtpEmail } from "../lib/emailService.js";
+import { generateOtp } from "../lib/otpFunctions.js";
 
 const registerUser = async (req: Request, res: Response) => {
   logger.info("User registration endpoint hit.");
@@ -33,7 +34,7 @@ const registerUser = async (req: Request, res: Response) => {
 
     const hashedPassword: string = await hashPassword(password);
 
-    const createUser = await prisma.user.create({
+    const createdUser = await prisma.user.create({
       data: {
         username,
         email,
@@ -41,9 +42,7 @@ const registerUser = async (req: Request, res: Response) => {
       },
     });
 
-    const token = generateTokens(createUser);
-
-    if (!createUser) {
+    if (!createdUser) {
       logger.error("Error during user registration");
       return res.status(500).json({
         success: false,
@@ -51,10 +50,14 @@ const registerUser = async (req: Request, res: Response) => {
       });
     }
 
+    const otp = await generateOtp(createdUser.id);
+    sendOtpEmail(email, otp);
+
+    // DO something
+
     return res.status(201).json({
       success: true,
       message: "User registered successfully",
-      token,
     });
   } catch (error) {
     logger.error("Error occured while user registration", { error });

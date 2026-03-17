@@ -5,7 +5,7 @@ const MAX_ATTEMPTS = 5;
 const OTP_EXPIRY_SECONDS = 300;
 
 export const generateOtp = async (userId: string): Promise<string> => {
-  const otp = crypto.randomInt(100000, 999999).toString();
+  const otp = crypto.randomInt(100000, 1000000).toString();
 
   await redisClient.set(`otp:${userId}`, otp, {
     EX: OTP_EXPIRY_SECONDS,

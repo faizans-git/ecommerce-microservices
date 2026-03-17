@@ -17,6 +17,7 @@ model User {
   id String @id @default(cuid())
   username String @db.VarChar(20) @unique
   email String  @unique @db.VarChar(120)
+  isVerified Boolean  @default(false)
   password String 
   role Role @default(USER)
   firstName   String?  @db.VarChar(50)
@@ -44,17 +45,6 @@ model RefreshToken{
   @@map("refresh_tokens")
 }
 
-model OTP{
-  id         String   @id @default(cuid())
-  userId     String
-  code       String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-
-  @@index([userId])
-  
-
-}
 
 enum Role {
   USER

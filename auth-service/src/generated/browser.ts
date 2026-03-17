@@ -27,8 +27,3 @@ export type User = Prisma.UserModel
  * 
  */
 export type RefreshToken = Prisma.RefreshTokenModel
-/**
- * Model OTP
- * 
- */
-export type OTP = Prisma.OTPModel

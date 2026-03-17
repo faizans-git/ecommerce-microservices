@@ -25,6 +25,7 @@
     "ioredis": "^5.10.0",
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^8.0.2",
     "prisma": "^7.4.2",
     "rate-limit-redis": "^4.3.1",
     "redis": "^5.11.0",
@@ -35,6 +36,7 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.3.3",
+    "@types/nodemailer": "^7.0.11",
     "concurrently": "^9.2.1",
     "nodemon": "^3.1.14",
     "typescript": "^5.9.3"

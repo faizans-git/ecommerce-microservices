@@ -435,6 +435,7 @@ export declare const UserScalarFieldEnum: {
     readonly id: "id";
     readonly username: "username";
     readonly email: "email";
+    readonly isVerified: "isVerified";
     readonly password: "password";
     readonly role: "role";
     readonly firstName: "firstName";
@@ -479,6 +480,10 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'String[]'
  */
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>;
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>;
 /**
  * Reference to a field of type 'Role'
  */
