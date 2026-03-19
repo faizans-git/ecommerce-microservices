@@ -8,6 +8,7 @@ import router from "./routes/proxyRoutes.js";
 import { authLimiter, generalLimiter } from "./middlewares/rateLimiter.js";
 import { notFound, requestLogger } from "./middlewares/utilMiddlewares.js";
 import { connectRedis } from "./config/redisClient.js";
+import shutdown from "./utils/shutDown.js";
 
 const app = express();
 
@@ -24,10 +25,13 @@ app.use("*", notFound);
 
 app.use(errorHandler);
 
-connectRedis();
+await connectRedis();
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   logger.info(`API Gateway runnning at: ${PORT}`);
   console.log("Listening");
 });
+
+process.on("SIGINT", () => shutdown("SIGINT"));
+process.on("SIGTERM", () => shutdown("SIGTERM"));

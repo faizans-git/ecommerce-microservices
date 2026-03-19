@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", // Modern Node
+    "module": "NodeNext", // ESM support
+    "moduleResolution": "NodeNext", // Resolve imports like Node
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "sourceMap": true,
+    "types": ["node"],
+    "lib": ["ES2022"], // Include ES globals
+    "isolatedModules": false, // Turn off for Node backend
+    "verbatimModuleSyntax": false // Turn off to fix process type recognition
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["dist", "node_modules"]
+}
