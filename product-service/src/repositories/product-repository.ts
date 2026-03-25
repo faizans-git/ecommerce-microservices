@@ -1,7 +1,5 @@
-// repositories/product.repository.ts
 import prisma from "../lib/db.js";
 
-// --- DTOs / Type definitions ---
 interface VariantAttributeDTO {
   name: string;
   value: string;
@@ -20,7 +18,7 @@ interface ImageDTO {
   sortOrder?: number;
 }
 
-interface CreateProductDTO {
+export interface CreateProductDTO {
   name: string;
   description?: string;
   slug: string;
@@ -79,7 +77,6 @@ export class ProductRepository {
     });
   }
 
-  // --- Get single product by ID ---
   async getProductById(id: string) {
     return prisma.product.findFirst({
       where: { id, deletedAt: null },
@@ -107,7 +104,6 @@ export class ProductRepository {
     });
   }
 
-  // --- Get multiple products with filters & pagination ---
   async getProducts(params: GetProductsParams) {
     const { limit = 10, cursor, categoryId, minPrice, maxPrice } = params;
 
@@ -132,7 +128,54 @@ export class ProductRepository {
     });
   }
 
-  // Update stock safely (prevents negative stock)
+  async findBySlug(slug: string) {
+    return prisma.product.findFirst({
+      where: { slug, deletedAt: null },
+      select: { id: true, name: true, slug: true },
+    });
+  }
+
+  async updateProduct(id: string, data: Partial<CreateProductDTO>) {
+    const { variants, images, ...productData } = data;
+
+    return prisma.product.update({
+      where: { id },
+      data: {
+        ...productData,
+        variants: variants
+          ? {
+              deleteMany: {},
+              create: variants.map((variant) => ({
+                sku: variant.sku,
+                price: variant.price,
+                stock: variant.stock,
+                attributes: {
+                  create: variant.attributes?.map((attr) => ({
+                    name: attr.name,
+                    value: attr.value,
+                  })),
+                },
+              })),
+            }
+          : undefined,
+        images: images
+          ? {
+              deleteMany: {},
+              create: images.map((img) => ({
+                url: img.url,
+                altText: img.altText,
+                sortOrder: img.sortOrder ?? 0,
+              })),
+            }
+          : undefined,
+      },
+      include: {
+        variants: { include: { attributes: true } },
+        images: true,
+      },
+    });
+  }
+
   async updateStock(variantId: string, quantity: number) {
     return prisma.productVariant.updateMany({
       where: { id: variantId, stock: { gte: quantity } },

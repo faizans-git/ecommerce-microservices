@@ -1,5 +1,7 @@
-// src/services/product.service.ts
-import { ProductRepository } from "../repositories/product-repository.js";
+import {
+  CreateProductDTO,
+  ProductRepository,
+} from "../repositories/product-repository.js";
 import { AppError } from "../middlewares/errorMiddleware.js";
 import logger from "../lib/logger.js";
 
@@ -7,20 +9,21 @@ export class ProductService {
   private repo: ProductRepository;
 
   constructor(repo?: ProductRepository) {
-    // Allows dependency injection for testing
     this.repo = repo || new ProductRepository();
   }
 
-  async createProduct(data: any) {
+  //
+  async createProduct(data: CreateProductDTO) {
     const existing = await this.repo.findBySlug(data.slug);
-    if (existing) {
-      logger.warn("Attempted to create product with duplicate slug", {
-        slug: data.slug,
-      });
-      throw new AppError("Product slug already exists", 400);
-    }
+    if (existing) throw new AppError("Product slug already exists", 400);
 
-    return this.repo.createProduct(data);
+    try {
+      return await this.repo.createProduct(data);
+    } catch (err: any) {
+      // Optional: detect Prisma constraint errors
+      logger.error("Repository failed to create product", { error: err });
+      throw new AppError("Unable to create product at the moment", 500);
+    }
   }
 
   // GET SINGLE PRODUCT
@@ -33,14 +36,14 @@ export class ProductService {
   }
 
   // GET ALL PRODUCTS (with pagination & optional filtering)
-  async getAllProducts(options?: { page?: number; limit?: number }) {
-    const page = options?.page || 1;
-    const limit = options?.limit || 20;
-    const offset = (page - 1) * limit;
+  //   async getAllProducts(options?: { page?: number; limit?: number }) {
+  //     const page = options?.page || 1;
+  //     const limit = options?.limit || 20;
+  //     const offset = (page - 1) * limit;
 
-    const products = await this.repo.getAllProducts({ offset, limit });
-    return products;
-  }
+  //     const products = await this.repo.getProducts({ offset, limit });
+  //     return products;
+  //   }
 
   async updateProduct(id: string, data: any) {
     const product = await this.repo.getProductById(id);
