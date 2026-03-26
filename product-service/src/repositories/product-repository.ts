@@ -1,43 +1,8 @@
-import prisma from "../lib/db.js";
-
-interface VariantAttributeDTO {
-  name: string;
-  value: string;
-}
-
-interface VariantDTO {
-  sku: string;
-  price: number;
-  stock: number;
-  attributes?: VariantAttributeDTO[];
-}
-
-interface ImageDTO {
-  url: string;
-  altText?: string;
-  sortOrder?: number;
-}
-
-export interface CreateProductDTO {
-  name: string;
-  description?: string;
-  slug: string;
-  basePrice: number;
-  categoryId?: string;
-  variants: VariantDTO[];
-  images?: ImageDTO[];
-}
-
-interface GetProductsParams {
-  limit?: number;
-  cursor?: string;
-  categoryId?: string;
-  minPrice?: number;
-  maxPrice?: number;
-}
+import prisma from "../lib/db/postgres.js";
+import { ProductDTO, GetProductsParams } from "../types/productTypes.js";
 
 export class ProductRepository {
-  async createProduct(data: CreateProductDTO) {
+  async createProduct(data: ProductDTO) {
     return prisma.product.create({
       data: {
         name: data.name,
@@ -135,7 +100,7 @@ export class ProductRepository {
     });
   }
 
-  async updateProduct(id: string, data: Partial<CreateProductDTO>) {
+  async updateProduct(id: string, data: Partial<ProductDTO>) {
     const { variants, images, ...productData } = data;
 
     return prisma.product.update({

@@ -1,4 +1,3 @@
-// src/controllers/products/product.controller.ts
 import { Request, Response, NextFunction } from "express";
 import { ProductService } from "../services/product-service.js";
 import { AppError } from "../middlewares/errorMiddleware.js";
@@ -17,7 +16,6 @@ export class ProductController {
     if (!id) throw new AppError("Product ID is required", 400);
 
     const product = await productService.getProductById(id);
-    if (!product) throw new AppError("Product not found", 404);
 
     return res.json({ success: true, data: product });
   });

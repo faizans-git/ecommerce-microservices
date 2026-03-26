@@ -1,9 +1,8 @@
-import {
-  CreateProductDTO,
-  ProductRepository,
-} from "../repositories/product-repository.js";
+import { ProductRepository } from "../repositories/product-repository.js";
 import { AppError } from "../middlewares/errorMiddleware.js";
 import logger from "../lib/logger.js";
+import { cache } from "../lib/cacheHelper.js";
+import { ProductDTO } from "../types/productTypes.js";
 
 export class ProductService {
   private repo: ProductRepository;
@@ -13,25 +12,29 @@ export class ProductService {
   }
 
   //
-  async createProduct(data: CreateProductDTO) {
+  async createProduct(data: ProductDTO) {
     const existing = await this.repo.findBySlug(data.slug);
     if (existing) throw new AppError("Product slug already exists", 400);
 
     try {
       return await this.repo.createProduct(data);
     } catch (err: any) {
-      // Optional: detect Prisma constraint errors
       logger.error("Repository failed to create product", { error: err });
       throw new AppError("Unable to create product at the moment", 500);
     }
   }
 
-  // GET SINGLE PRODUCT
   async getProductById(id: string) {
+    const cacheKey = `product:${id}`;
+    const cached = await cache.get<ProductDTO>(cacheKey);
+    if (cached) return cached;
+
     const product = await this.repo.getProductById(id);
     if (!product) {
       throw new AppError("Product not found", 404);
     }
+    await cache.set(cacheKey, product, 300);
+
     return product;
   }
 
