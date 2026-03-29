@@ -62,3 +62,87 @@
 {"duration":"4ms","level":"info","message":"HTTP Request","method":"GET","params":{"id":"2b2edc0d-a646-49fe-841d-4851e6242315"},"query":{},"service":"product-service","status":200,"timestamp":"2026-03-26T13:44:44.024Z","url":"/api/v1/products/2b2edc0d-a646-49fe-841d-4851e6242315"}
 {"duration":"1ms","level":"info","message":"HTTP Request","method":"GET","params":{"id":"2b2edc0d-a646-49fe-841d-4851e6242315"},"query":{},"service":"product-service","status":200,"timestamp":"2026-03-26T13:44:45.003Z","url":"/api/v1/products/2b2edc0d-a646-49fe-841d-4851e6242315"}
 {"duration":"1ms","level":"info","message":"HTTP Request","method":"GET","params":{"id":"2b2edc0d-a646-49fe-841d-4851e6242315"},"query":{},"service":"product-service","status":200,"timestamp":"2026-03-26T13:44:45.857Z","url":"/api/v1/products/2b2edc0d-a646-49fe-841d-4851e6242315"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T15:09:38.283Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T15:09:38.292Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T15:09:38.299Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T15:15:23.855Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T15:15:23.869Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T15:15:23.894Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T15:15:57.038Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T15:15:57.053Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T15:15:57.062Z"}
+{"duration":"4195ms","level":"info","message":"HTTP Request","method":"DELETE","params":{"id":"2b2edc0d-a646-49fe-841d-4851e6242315"},"query":{},"service":"product-service","status":200,"timestamp":"2026-03-26T15:17:01.029Z","url":"/api/v1/products/2b2edc0d-a646-49fe-841d-4851e6242315"}
+{"error":{"clientVersion":"7.5.0","code":"P2002","meta":{"driverAdapterError":{"cause":{"constraint":{"fields":["slug"]},"kind":"UniqueConstraintViolation","originalCode":"23505","originalMessage":"duplicate key value violates unique constraint \"Product_slug_key\""},"name":"DriverAdapterError"},"modelName":"Product"},"name":"PrismaClientKnownRequestError"},"level":"error","message":"Repository failed to create product","service":"product-service","timestamp":"2026-03-26T15:17:23.387Z"}
+{"level":"error","message":"Unable to create product at the moment","method":"POST","path":"/api/v1/products","service":"product-service","stack":"Error: Unable to create product at the moment\n    at ProductService.createProduct (file:///Users/faizan/ecommerce-microservices/product-service/dist/services/product-service.js:20:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///Users/faizan/ecommerce-microservices/product-service/dist/controllers/product-controller.js:7:25","statusCode":500,"timestamp":"2026-03-26T15:17:23.389Z"}
+{"duration":"2834ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":500,"timestamp":"2026-03-26T15:17:23.391Z","url":"/api/v1/products"}
+{"error":{"clientVersion":"7.5.0","code":"P2002","meta":{"driverAdapterError":{"cause":{"constraint":{"fields":["slug"]},"kind":"UniqueConstraintViolation","originalCode":"23505","originalMessage":"duplicate key value violates unique constraint \"Product_slug_key\""},"name":"DriverAdapterError"},"modelName":"Product"},"name":"PrismaClientKnownRequestError"},"level":"error","message":"Repository failed to create product","service":"product-service","timestamp":"2026-03-26T15:17:46.850Z"}
+{"level":"error","message":"Unable to create product at the moment","method":"POST","path":"/api/v1/products","service":"product-service","stack":"Error: Unable to create product at the moment\n    at ProductService.createProduct (file:///Users/faizan/ecommerce-microservices/product-service/dist/services/product-service.js:20:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///Users/faizan/ecommerce-microservices/product-service/dist/controllers/product-controller.js:7:25","statusCode":500,"timestamp":"2026-03-26T15:17:46.851Z"}
+{"duration":"2509ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":500,"timestamp":"2026-03-26T15:17:46.856Z","url":"/api/v1/products"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T15:22:20.491Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T15:22:20.505Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T15:22:20.511Z"}
+{"level":"error","message":"Repository failed to create product: PrismaClientKnownRequestError: \nInvalid `prisma.product.create()` invocation:\n\n\nUnique constraint failed on the fields: (`slug`)","service":"product-service","timestamp":"2026-03-26T15:25:46.570Z"}
+{"level":"error","message":"Unable to create product at the moment","method":"POST","path":"/api/v1/products","service":"product-service","stack":"Error: Unable to create product at the moment\n    at ProductService.createProduct (file:///Users/faizan/ecommerce-microservices/product-service/dist/services/product-service.js:20:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///Users/faizan/ecommerce-microservices/product-service/dist/controllers/product-controller.js:7:25","statusCode":500,"timestamp":"2026-03-26T15:25:46.571Z"}
+{"duration":"4477ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":500,"timestamp":"2026-03-26T15:25:46.575Z","url":"/api/v1/products"}
+{"level":"info","message":"Redis shutting down due to SIGINT","service":"product-service","timestamp":"2026-03-26T15:28:33.249Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T15:28:47.918Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T15:28:47.938Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T15:28:47.948Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T15:28:55.553Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T15:28:55.577Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T15:28:55.582Z"}
+{"level":"error","message":"Repository failed to create product: PrismaClientKnownRequestError: \nInvalid `prisma.product.create()` invocation:\n\n\nUnique constraint failed on the fields: (`slug`)","service":"product-service","timestamp":"2026-03-26T15:29:15.849Z"}
+{"level":"error","message":"Unable to create product at the moment","method":"POST","path":"/api/v1/products","service":"product-service","stack":"Error: Unable to create product at the moment\n    at ProductService.createProduct (file:///Users/faizan/ecommerce-microservices/product-service/dist/services/product-service.js:20:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///Users/faizan/ecommerce-microservices/product-service/dist/controllers/product-controller.js:7:25","statusCode":500,"timestamp":"2026-03-26T15:29:15.851Z"}
+{"duration":"3140ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":500,"timestamp":"2026-03-26T15:29:15.899Z","url":"/api/v1/products"}
+{"level":"error","message":"Repository failed to create product: PrismaClientKnownRequestError: \nInvalid `prisma.product.create()` invocation:\n\n\nUnique constraint failed on the fields: (`sku`)","service":"product-service","timestamp":"2026-03-26T15:36:29.382Z"}
+{"level":"error","message":"Unable to create product at the moment","method":"POST","path":"/api/v1/products","service":"product-service","stack":"Error: Unable to create product at the moment\n    at ProductService.createProduct (file:///Users/faizan/ecommerce-microservices/product-service/dist/services/product-service.js:20:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///Users/faizan/ecommerce-microservices/product-service/dist/controllers/product-controller.js:7:25","statusCode":500,"timestamp":"2026-03-26T15:36:29.383Z"}
+{"duration":"4649ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":500,"timestamp":"2026-03-26T15:36:29.388Z","url":"/api/v1/products"}
+{"duration":"3226ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":201,"timestamp":"2026-03-26T15:36:54.288Z","url":"/api/v1/products"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T17:51:32.013Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T17:51:32.156Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T17:51:32.171Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T17:51:35.779Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T17:51:35.843Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T17:51:35.850Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T17:51:56.115Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T17:51:56.132Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T17:51:56.142Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T17:53:20.791Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T17:53:20.874Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T17:53:20.899Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T17:53:41.767Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T17:53:41.781Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T17:53:41.784Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T17:53:46.590Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T17:53:46.614Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T17:53:46.624Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T17:56:08.373Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T17:56:08.387Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T17:56:08.397Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-26T17:58:07.629Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-26T17:58:07.646Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-26T17:58:07.662Z"}
+{"duration":"29ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T11:57:23.711Z","url":"/api/post/create-post"}
+{"duration":"3ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T11:58:33.630Z","url":"/api/post/create-post"}
+{"duration":"2ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:02:35.513Z","url":"/api/post/create-post"}
+{"duration":"4ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:02:37.082Z","url":"/api/post/create-post"}
+{"duration":"9ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:04:41.335Z","url":"/api/post/create-post"}
+{"duration":"4ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:04:42.289Z","url":"/api/post/create-post"}
+{"duration":"3ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:04:43.081Z","url":"/api/post/create-post"}
+{"duration":"4ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:04:43.822Z","url":"/api/post/create-post"}
+{"duration":"4ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:05:55.600Z","url":"/api/post/create-post"}
+{"duration":"5ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:06:14.034Z","url":"/api/post/create-post"}
+{"duration":"1ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:06:15.029Z","url":"/api/post/create-post"}
+{"duration":"0ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:06:15.666Z","url":"/api/post/create-post"}
+{"duration":"0ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:06:45.703Z","url":"/api/post/create-post"}
+{"duration":"0ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:06:46.531Z","url":"/api/post/create-post"}
+{"duration":"1ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:06:47.155Z","url":"/api/post/create-post"}
+{"duration":"1ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:10:05.829Z","url":"/api/post/create-post"}
+{"duration":"0ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:10:06.604Z","url":"/api/post/create-post"}
+{"duration":"2ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:10:07.396Z","url":"/api/post/create-post"}
+{"duration":"2ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:10:08.127Z","url":"/api/post/create-post"}
+{"duration":"0ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:10:09.332Z","url":"/api/post/create-post"}
+{"duration":"1ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:10:55.702Z","url":"/api/post/create-post"}
+{"duration":"8ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:23:36.079Z","url":"/api/post/create-post"}
+{"level":"info","message":"Redis shutting down due to SIGINT","service":"product-service","timestamp":"2026-03-28T12:23:49.584Z"}
+{"level":"info","message":"Redis disconnected","service":"product-service","timestamp":"2026-03-28T12:23:49.631Z"}

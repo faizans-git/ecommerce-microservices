@@ -28,8 +28,13 @@ export interface ProductDTO {
 
 export interface GetProductsParams {
   limit?: number;
-  cursor?: string;
+  skip?: number;
+  page?: number;
+
   categoryId?: string;
   minPrice?: number;
   maxPrice?: number;
+
+  sortBy?: "createdAt" | "basePrice" | "name";
+  order?: "asc" | "desc";
 }

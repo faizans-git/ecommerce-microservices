@@ -1,45 +1,50 @@
 import prisma from "../lib/db/postgres.js";
+import { mapPrismaError } from "../lib/prismaError.js";
 import { ProductDTO, GetProductsParams } from "../types/productTypes.js";
 
 export class ProductRepository {
   async createProduct(data: ProductDTO) {
-    return prisma.product.create({
-      data: {
-        name: data.name,
-        description: data.description,
-        slug: data.slug,
-        basePrice: data.basePrice,
-        categoryId: data.categoryId,
-        variants: {
-          create: data.variants.map((variant) => ({
-            sku: variant.sku,
-            price: variant.price,
-            stock: variant.stock,
-            attributes: {
-              create: variant.attributes?.map((attr) => ({
-                name: attr.name,
-                value: attr.value,
-              })),
-            },
-          })),
-        },
-        images: {
-          create: data.images?.map((img) => ({
-            url: img.url,
-            altText: img.altText,
-            sortOrder: img.sortOrder ?? 0,
-          })),
-        },
-      },
-      include: {
-        variants: {
-          include: {
-            attributes: true,
+    try {
+      return prisma.product.create({
+        data: {
+          name: data.name,
+          description: data.description,
+          slug: data.slug,
+          basePrice: data.basePrice,
+          categoryId: data.categoryId,
+          variants: {
+            create: data.variants.map((variant) => ({
+              sku: variant.sku,
+              price: variant.price,
+              stock: variant.stock,
+              attributes: {
+                create: variant.attributes?.map((attr) => ({
+                  name: attr.name,
+                  value: attr.value,
+                })),
+              },
+            })),
+          },
+          images: {
+            create: data.images?.map((img) => ({
+              url: img.url,
+              altText: img.altText,
+              sortOrder: img.sortOrder ?? 0,
+            })),
           },
         },
-        images: true,
-      },
-    });
+        include: {
+          variants: {
+            include: {
+              attributes: true,
+            },
+          },
+          images: true,
+        },
+      });
+    } catch (error) {
+      throw mapPrismaError(error);
+    }
   }
 
   async getProductById(id: string) {
@@ -70,16 +75,27 @@ export class ProductRepository {
   }
 
   async getProducts(params: GetProductsParams) {
-    const { limit = 10, cursor, categoryId, minPrice, maxPrice } = params;
+    const {
+      limit,
+      skip,
+      categoryId,
+      minPrice,
+      maxPrice,
+      sortBy = "createdAt",
+      order = "desc",
+    } = params;
 
     return prisma.product.findMany({
       take: limit,
-      ...(cursor && { skip: 1, cursor: { id: cursor } }),
+      skip,
       where: {
         deletedAt: null,
         ...(categoryId && { categoryId }),
         ...(minPrice !== undefined && { basePrice: { gte: minPrice } }),
         ...(maxPrice !== undefined && { basePrice: { lte: maxPrice } }),
+      },
+      orderBy: {
+        [sortBy]: order,
       },
       select: {
         id: true,
@@ -89,63 +105,31 @@ export class ProductRepository {
         images: { take: 1, select: { url: true } },
         variants: { select: { price: true, stock: true } },
       },
-      orderBy: { createdAt: "desc" },
     });
   }
 
-  async findBySlug(slug: string) {
-    return prisma.product.findFirst({
-      where: { slug, deletedAt: null },
-      select: { id: true, name: true, slug: true },
-    });
-  }
+  async countProducts(params: Omit<GetProductsParams, "limit" | "skip">) {
+    const { categoryId, minPrice, maxPrice } = params;
 
-  async updateProduct(id: string, data: Partial<ProductDTO>) {
-    const { variants, images, ...productData } = data;
-
-    return prisma.product.update({
-      where: { id },
-      data: {
-        ...productData,
-        variants: variants
-          ? {
-              deleteMany: {},
-              create: variants.map((variant) => ({
-                sku: variant.sku,
-                price: variant.price,
-                stock: variant.stock,
-                attributes: {
-                  create: variant.attributes?.map((attr) => ({
-                    name: attr.name,
-                    value: attr.value,
-                  })),
-                },
-              })),
-            }
-          : undefined,
-        images: images
-          ? {
-              deleteMany: {},
-              create: images.map((img) => ({
-                url: img.url,
-                altText: img.altText,
-                sortOrder: img.sortOrder ?? 0,
-              })),
-            }
-          : undefined,
-      },
-      include: {
-        variants: { include: { attributes: true } },
-        images: true,
+    return prisma.product.count({
+      where: {
+        deletedAt: null,
+        ...(categoryId && { categoryId }),
+        ...(minPrice !== undefined && { basePrice: { gte: minPrice } }),
+        ...(maxPrice !== undefined && { basePrice: { lte: maxPrice } }),
       },
     });
   }
 
-  async updateStock(variantId: string, quantity: number) {
-    return prisma.productVariant.updateMany({
-      where: { id: variantId, stock: { gte: quantity } },
-      data: { stock: { decrement: quantity } },
+  async existsBySlug(slug: string): Promise<boolean> {
+    const count = await prisma.product.count({
+      where: {
+        slug,
+        deletedAt: null,
+      },
     });
+
+    return count > 0;
   }
 
   async deleteProduct(id: string) {
