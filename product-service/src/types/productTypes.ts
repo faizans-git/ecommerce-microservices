@@ -38,3 +38,21 @@ export interface GetProductsParams {
   sortBy?: "createdAt" | "basePrice" | "name";
   order?: "asc" | "desc";
 }
+
+export interface ProductListResponse {
+  data: {
+    id: string;
+    name: string;
+    slug: string;
+    basePrice: number;
+    images: { url: string }[];
+    variants: { price: number; stock: number }[];
+  }[];
+
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}

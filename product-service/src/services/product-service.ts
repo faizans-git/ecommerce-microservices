@@ -2,7 +2,11 @@ import { ProductRepository } from "../repositories/product-repository.js";
 import { AppError } from "../middlewares/errorMiddleware.js";
 import logger from "../lib/logger.js";
 import { cache } from "../lib/cacheHelper.js";
-import { GetProductsParams, ProductDTO } from "../types/productTypes.js";
+import {
+  GetProductsParams,
+  ProductDTO,
+  ProductListResponse,
+} from "../types/productTypes.js";
 
 export class ProductService {
   private repo: ProductRepository;
@@ -39,6 +43,12 @@ export class ProductService {
   }
 
   async getAllProducts(options?: GetProductsParams) {
+    const cacheKey = `products:list:${JSON.stringify(options || {})}`;
+    const cachedData = await cache.get<ProductListResponse>(cacheKey);
+    if (cachedData) {
+      return cachedData;
+    }
+
     const page = options?.page || 1;
     const limit = options?.limit || 20;
     const offset = (page - 1) * limit;
@@ -60,7 +70,7 @@ export class ProductService {
       this.repo.countProducts(filters),
     ]);
 
-    return {
+    const result = {
       data: products,
       meta: {
         total,
@@ -69,23 +79,10 @@ export class ProductService {
         totalPages: Math.ceil(total / limit),
       },
     };
+
+    await cache.set(cacheKey, result, 300);
+    return result;
   }
-
-  // async updateProduct(id: string, data: any) {
-  //   const product = await this.repo.getProductById(id);
-  //   if (!product) {
-  //     throw new AppError("Product not found", 404);
-  //   }
-
-  //   if (data.slug && data.slug !== product.slug) {
-  //     const slugExists = await this.repo.findBySlug(data.slug);
-  //     if (slugExists) {
-  //       throw new AppError("Product slug already exists", 400);
-  //     }
-  //   }
-
-  //   return this.repo.updateProduct(id, data);
-  // }
 
   async deleteProductById(id: string) {
     const deleted = await this.repo.deleteProduct(id);
