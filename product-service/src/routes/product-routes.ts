@@ -5,11 +5,17 @@ import {
   createProductSchema,
   getAllProductsSchema,
 } from "../validators/productValidator.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 const controller = new ProductController();
 
-router.post("/", validate(createProductSchema), controller.createProduct);
+router.post(
+  "/",
+  authMiddleware,
+  validate(createProductSchema),
+  controller.createProduct,
+);
 
 router.get(
   "/",
@@ -19,6 +25,6 @@ router.get(
 
 router.get("/:id", controller.getProductById);
 
-router.delete("/:id", controller.deleteProduct);
+router.delete("/:id", authMiddleware, controller.deleteProduct);
 
 export default router;
