@@ -4,6 +4,7 @@ import { validate } from "../middlewares/validateMiddleware.js";
 import {
   createProductSchema,
   getAllProductsSchema,
+  updateProductSchema,
 } from "../validators/productValidator.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
@@ -26,5 +27,12 @@ router.get(
 router.get("/:id", controller.getProductById);
 
 router.delete("/:id", authMiddleware, controller.deleteProduct);
+
+router.patch(
+  "/:id",
+  authMiddleware,
+  validate(updateProductSchema),
+  controller.updateProduct,
+);
 
 export default router;

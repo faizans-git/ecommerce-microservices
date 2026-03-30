@@ -1,6 +1,10 @@
 import prisma from "../lib/db/postgres.js";
 import { mapPrismaError } from "../lib/prismaError.js";
-import { ProductDTO, GetProductsParams } from "../types/productTypes.js";
+import {
+  ProductDTO,
+  GetProductsParams,
+  UpdateProductDTO,
+} from "../types/productTypes.js";
 
 export class ProductRepository {
   async createProduct(data: ProductDTO) {
@@ -39,6 +43,37 @@ export class ProductRepository {
               attributes: true,
             },
           },
+          images: true,
+        },
+      });
+    } catch (error) {
+      throw mapPrismaError(error);
+    }
+  }
+
+  async updateProduct(id: string, data: UpdateProductDTO) {
+    try {
+      return prisma.product.update({
+        where: { id },
+        data: {
+          ...(data.name && { name: data.name }),
+          ...(data.description && { description: data.description }),
+          ...(data.slug && { slug: data.slug }),
+          ...(data.basePrice && { basePrice: data.basePrice }),
+          ...(data.categoryId && { categoryId: data.categoryId }),
+          ...(data.images && {
+            images: {
+              deleteMany: {},
+              create: data.images.map((img) => ({
+                url: img.url,
+                altText: img.altText,
+                sortOrder: img.sortOrder ?? 0,
+              })),
+            },
+          }),
+        },
+        include: {
+          variants: { include: { attributes: true } },
           images: true,
         },
       });

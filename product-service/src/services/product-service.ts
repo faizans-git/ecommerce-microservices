@@ -6,6 +6,7 @@ import {
   GetProductsParams,
   ProductDTO,
   ProductListResponse,
+  UpdateProductDTO,
 } from "../types/productTypes.js";
 
 export class ProductService {
@@ -26,6 +27,28 @@ export class ProductService {
     } catch (err: any) {
       logger.error(`Repository failed to create product: ${err}`);
       throw new AppError("Unable to create product at the moment", 500);
+    }
+  }
+
+  async updateProduct(id: string, data: UpdateProductDTO) {
+    const product = await this.repo.getProductById(id);
+    if (!product) throw new AppError("Product not found", 404);
+
+    if (data.slug && data.slug !== product.slug) {
+      const slugTaken = await this.repo.existsBySlug(data.slug);
+      if (slugTaken) throw new AppError("Product slug already exists", 400);
+    }
+
+    try {
+      const updated = await this.repo.updateProduct(id, data);
+      await Promise.all([
+        cache.del(`product:${id}`),
+        cache.deletePattern("products:list:*"),
+      ]);
+      return updated;
+    } catch (err: any) {
+      logger.error(`Repository failed to update product: ${err}`);
+      throw new AppError("Unable to update product at the moment", 500);
     }
   }
 

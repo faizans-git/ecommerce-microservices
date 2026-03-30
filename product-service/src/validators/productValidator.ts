@@ -52,3 +52,20 @@ export const getAllProductsSchema = Joi.object({
 
   order: Joi.string().valid("asc", "desc").default("desc"),
 });
+
+export const updateProductSchema = Joi.object({
+  name: Joi.string().min(1).optional(),
+  description: Joi.string().optional(),
+  slug: Joi.string().min(1).optional(),
+  basePrice: Joi.number().positive().optional(),
+  categoryId: Joi.string().optional(),
+  images: Joi.array()
+    .items(
+      Joi.object({
+        url: Joi.string().uri().required(),
+        altText: Joi.string().optional(),
+        sortOrder: Joi.number().optional(),
+      }),
+    )
+    .optional(),
+});

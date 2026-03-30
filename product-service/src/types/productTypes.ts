@@ -56,3 +56,12 @@ export interface ProductListResponse {
     totalPages: number;
   };
 }
+
+export interface UpdateProductDTO {
+  name?: string;
+  description?: string;
+  slug?: string;
+  basePrice?: number;
+  categoryId?: string;
+  images?: { url: string; altText?: string; sortOrder?: number }[];
+}

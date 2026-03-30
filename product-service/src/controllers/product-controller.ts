@@ -11,6 +11,18 @@ export class ProductController {
     return res.status(201).json({ success: true, data: product });
   });
 
+  updateProduct = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id = req.params.id as string;
+      if (!id) throw new AppError("Product ID is required", 400);
+
+      const updated = await productService.updateProduct(id, req.body);
+      res.status(200).json({ success: true, data: updated });
+    } catch (err) {
+      next(err);
+    }
+  };
+
   getProductById = asyncHandler(async (req: Request, res: Response) => {
     const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     if (!id) throw new AppError("Product ID is required", 400);
