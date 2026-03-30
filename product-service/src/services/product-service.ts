@@ -1,6 +1,4 @@
 import { ProductRepository } from "../repositories/product-repository.js";
-import { AppError } from "../middlewares/errorMiddleware.js";
-import logger from "../lib/logger.js";
 import { cache } from "../lib/cacheHelper.js";
 import {
   GetProductsParams,
@@ -8,6 +6,7 @@ import {
   ProductListResponse,
   UpdateProductDTO,
 } from "../types/productTypes.js";
+import { AppError } from "../middlewares/errorMiddleware.js";
 
 export class ProductService {
   private repo: ProductRepository;
@@ -16,19 +15,26 @@ export class ProductService {
     this.repo = repo || new ProductRepository();
   }
 
-  async createProduct(data: ProductDTO) {
-    try {
-      const existing = await this.repo.existsBySlug(data.slug);
-      if (existing) throw new AppError("Product slug already exists", 400);
+  private buildListCacheKey(options?: GetProductsParams): string {
+    const params = {
+      page: options?.page ?? 1,
+      limit: options?.limit ?? 20,
+      sortBy: options?.sortBy ?? "createdAt",
+      order: options?.order ?? "desc",
+      categoryId: options?.categoryId ?? null,
+      minPrice: options?.minPrice ?? null,
+      maxPrice: options?.maxPrice ?? null,
+    };
+    return `products:list:p${params.page}:l${params.limit}:s${params.sortBy}:o${params.order}:c${params.categoryId}:min${params.minPrice}:max${params.maxPrice}`;
+  }
 
-      const createdProduct = await this.repo.createProduct(data);
-      await cache.deletePattern(`products:list:*`);
-      return createdProduct;
-    } catch (err: any) {
-      if (err instanceof AppError) throw err;
-      logger.error(`Repository failed to create product: ${err}`);
-      throw new AppError("Unable to create product at the moment", 500);
-    }
+  async createProduct(data: ProductDTO) {
+    const existing = await this.repo.existsBySlug(data.slug);
+    if (existing) throw new AppError("Product slug already exists", 400);
+
+    const createdProduct = await this.repo.createProduct(data);
+    await cache.deletePattern(`products:list:*`);
+    return createdProduct;
   }
 
   async updateProduct(id: string, data: UpdateProductDTO) {
@@ -40,18 +46,12 @@ export class ProductService {
       if (slugTaken) throw new AppError("Product slug already exists", 400);
     }
 
-    try {
-      const updated = await this.repo.updateProduct(id, data);
-      await Promise.all([
-        cache.del(`product:${id}`),
-        cache.deletePattern("products:list:*"),
-      ]);
-      return updated;
-    } catch (err: any) {
-      if (err instanceof AppError) throw err;
-      logger.error(`Repository failed to update product: ${err}`);
-      throw new AppError("Unable to update product at the moment", 500);
-    }
+    const updated = await this.repo.updateProduct(id, data);
+    await Promise.all([
+      cache.del(`product:${id}`),
+      cache.deletePattern("products:list:*"),
+    ]);
+    return updated;
   }
 
   async getProductById(id: string) {
@@ -60,23 +60,19 @@ export class ProductService {
     if (cached) return cached;
 
     const product = await this.repo.getProductById(id);
-    if (!product) {
-      throw new AppError("Product not found", 404);
-    }
-    await cache.set(cacheKey, product, 300);
+    if (!product) throw new AppError("Product not found", 404);
 
+    await cache.set(cacheKey, product, 300);
     return product;
   }
 
   async getAllProducts(options?: GetProductsParams) {
-    const cacheKey = `products:list:${JSON.stringify(options || {})}`;
+    const cacheKey = this.buildListCacheKey(options);
     const cachedData = await cache.get<ProductListResponse>(cacheKey);
-    if (cachedData) {
-      return cachedData;
-    }
+    if (cachedData) return cachedData;
 
-    const page = options?.page || 1;
-    const limit = options?.limit || 20;
+    const page = options?.page ?? 1;
+    const limit = options?.limit ?? 20;
     const offset = (page - 1) * limit;
 
     const filters = {
@@ -112,14 +108,10 @@ export class ProductService {
 
   async deleteProductById(id: string) {
     const deleted = await this.repo.deleteProduct(id);
-    if (!deleted) {
-      throw new AppError("Product not found", 404);
-    }
     await Promise.all([
       cache.del(`product:${id}`),
       cache.deletePattern("products:list:*"),
     ]);
-
     return deleted;
   }
 }

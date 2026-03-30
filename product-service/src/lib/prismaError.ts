@@ -9,7 +9,7 @@ export function mapPrismaError(err: unknown): AppError {
       case "P2025":
         return new AppError("Record not found", 404);
       default:
-        return new AppError("Database constraint error", 400);
+        return new AppError("Database constraint error", 500);
     }
   }
 
