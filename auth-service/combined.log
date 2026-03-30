@@ -233,3 +233,20 @@
 {"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T12:22:22.178Z"}
 {"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-17T12:27:10.743Z"}
 {"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-17T12:27:10.762Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-30T18:26:12.265Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-30T18:26:12.286Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-30T18:26:19.974Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-30T18:26:19.990Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-30T18:39:19.471Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-30T18:39:19.497Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-30T18:39:43.171Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-30T18:39:43.186Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-30T18:40:16.672Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-30T18:40:16.693Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-30T18:40:20.705Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-30T18:40:20.741Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-30T18:40:25.134Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-30T18:40:25.262Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-30T18:40:30.706Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-30T18:40:30.725Z"}
+{"level":"error","message":"Wrong credentials for: frog17male@gmail.com","service":"Api-gateway","timestamp":"2026-03-30T18:40:42.600Z"}

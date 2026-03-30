@@ -10,15 +10,18 @@ import { apiRateLimiter } from "./middlewares/rateLimiter.js";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
 app.use(helmet());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  }),
+);
 
 app.use(apiRateLimiter);
-
-app.use(errorHandler);
-
 app.use("/api/auth", router);
 
+app.use(errorHandler);
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   logger.info(`Auth service runnning at ${PORT}`);
