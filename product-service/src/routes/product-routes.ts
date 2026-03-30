@@ -6,7 +6,7 @@ import {
   getAllProductsSchema,
   updateProductSchema,
 } from "../validators/productValidator.js";
-import { authMiddleware } from "../middlewares/authMiddleware.js";
+import { authMiddleware, isAdmin } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 const controller = new ProductController();
@@ -14,6 +14,7 @@ const controller = new ProductController();
 router.post(
   "/",
   authMiddleware,
+  isAdmin,
   validate(createProductSchema),
   controller.createProduct,
 );
@@ -31,6 +32,7 @@ router.delete("/:id", authMiddleware, controller.deleteProduct);
 router.patch(
   "/:id",
   authMiddleware,
+  isAdmin,
   validate(updateProductSchema),
   controller.updateProduct,
 );

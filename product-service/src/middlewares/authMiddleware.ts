@@ -20,3 +20,10 @@ export const authMiddleware = (
 
   next();
 };
+
+export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
+  if (req.user?.role !== "admin") {
+    throw new AppError("User not allowed access, addmin only endpoint", 401);
+  }
+  next();
+};
