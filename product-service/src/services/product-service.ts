@@ -15,13 +15,14 @@ export class ProductService {
     this.repo = repo || new ProductRepository();
   }
 
-  //
   async createProduct(data: ProductDTO) {
     const existing = await this.repo.existsBySlug(data.slug);
     if (existing) throw new AppError("Product slug already exists", 400);
 
     try {
-      return await this.repo.createProduct(data);
+      const createdProduct = await this.repo.createProduct(data);
+      await cache.deletePattern(`products:list:*`);
+      return createdProduct;
     } catch (err: any) {
       logger.error(`Repository failed to create product: ${err}`);
       throw new AppError("Unable to create product at the moment", 500);
@@ -89,7 +90,11 @@ export class ProductService {
     if (!deleted) {
       throw new AppError("Product not found", 404);
     }
-    await cache.del(`product:${id}`);
+    Promise.all([
+      cache.del(`product:${id}`),
+      cache.deletePattern("products:list:*"),
+    ]);
+
     return deleted;
   }
 }
