@@ -146,3 +146,12 @@
 {"duration":"8ms","level":"info","message":"HTTP Request","method":"POST","params":{},"query":{},"service":"product-service","status":404,"timestamp":"2026-03-28T12:23:36.079Z","url":"/api/post/create-post"}
 {"level":"info","message":"Redis shutting down due to SIGINT","service":"product-service","timestamp":"2026-03-28T12:23:49.584Z"}
 {"level":"info","message":"Redis disconnected","service":"product-service","timestamp":"2026-03-28T12:23:49.631Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-31T14:31:36.703Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-31T14:31:36.729Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-31T14:31:36.748Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-31T14:31:44.557Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-31T14:31:44.587Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-31T14:31:44.603Z"}
+{"level":"info","message":"Product service running on port 3002","service":"product-service","timestamp":"2026-03-31T14:43:25.471Z"}
+{"level":"info","message":"Redis connected","service":"product-service","timestamp":"2026-03-31T14:43:25.510Z"}
+{"level":"info","message":"Redis ready","service":"product-service","timestamp":"2026-03-31T14:43:25.522Z"}

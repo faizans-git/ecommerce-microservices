@@ -51,3 +51,5 @@ router.patch(
   validate(updateProductSchema),
   controller.updateProduct,
 );
+
+export default router;

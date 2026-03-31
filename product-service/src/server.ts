@@ -1,4 +1,3 @@
-// src/server.ts
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -7,7 +6,6 @@ import { errorHandler } from "./middlewares/errorMiddleware.js";
 import logger from "./lib/logger.js";
 import router from "./routes/product-routes.js";
 import { requestLogger } from "./middlewares/requestLogger.js";
-import { apiRateLimiter } from "./middlewares/rateLimiter.js";
 
 const app = express();
 
@@ -16,7 +14,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use(requestLogger);
-app.use(apiRateLimiter);
 
 app.get("/health", (_req, res) => {
   res.status(200).json({ status: "OK" });
