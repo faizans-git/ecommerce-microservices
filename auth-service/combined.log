@@ -250,3 +250,14 @@
 {"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-30T18:40:30.706Z"}
 {"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-30T18:40:30.725Z"}
 {"level":"error","message":"Wrong credentials for: frog17male@gmail.com","service":"Api-gateway","timestamp":"2026-03-30T18:40:42.600Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-31T09:54:08.385Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-31T09:54:08.427Z"}
+{"level":"info","message":"Redis connected","service":"Api-gateway","timestamp":"2026-03-31T09:54:16.004Z"}
+{"level":"info","message":"Auth service runnning at 3001","service":"Api-gateway","timestamp":"2026-03-31T09:54:16.031Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-31T09:54:22.899Z"}
+{"level":"error","message":"User with these credentials already exists: frog17male@gmail.com","service":"Api-gateway","timestamp":"2026-03-31T09:54:27.052Z"}
+{"level":"info","message":"User registration endpoint hit.","service":"Api-gateway","timestamp":"2026-03-31T09:55:29.629Z"}
+{"level":"warn","message":"Invalid OTP attempt for user: faixandisjoint@gmail.com","service":"Api-gateway","timestamp":"2026-03-31T09:55:51.083Z"}
+{"level":"warn","message":"Invalid OTP attempt for user: faixandisjoint@gmail.com","service":"Api-gateway","timestamp":"2026-03-31T10:04:56.205Z"}
+{"level":"warn","message":"Invalid OTP attempt for user: faixandisjoint@gmail.com","service":"Api-gateway","timestamp":"2026-03-31T10:04:57.213Z"}
+{"level":"info","message":"Tokens generated for user cmnefyidn0000ehgomlu0oiob","service":"Api-gateway","timestamp":"2026-03-31T10:05:24.787Z"}
