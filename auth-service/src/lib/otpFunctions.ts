@@ -4,10 +4,10 @@ import { redisClient } from "./Redis.js";
 const MAX_ATTEMPTS = 5;
 const OTP_EXPIRY_SECONDS = 300;
 
-export const generateOtp = async (userId: string): Promise<string> => {
+export const generateOtp = async (email: string): Promise<string> => {
   const otp = crypto.randomInt(100000, 1000000).toString();
 
-  await redisClient.set(`otp:${userId}`, otp, {
+  await redisClient.set(`otp:${email}`, otp, {
     EX: OTP_EXPIRY_SECONDS,
   });
 
