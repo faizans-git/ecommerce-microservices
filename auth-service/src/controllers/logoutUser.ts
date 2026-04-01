@@ -5,6 +5,7 @@ import prisma from "../lib/prisma.js";
 const logoutUser = async (req: Request, res: Response) => {
   try {
     const { refreshToken } = req.body;
+
     await prisma.refreshToken.deleteMany({
       where: {
         token: refreshToken,
