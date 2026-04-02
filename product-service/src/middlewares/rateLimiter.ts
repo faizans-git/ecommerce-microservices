@@ -3,7 +3,7 @@ import { RedisStore, RedisReply } from "rate-limit-redis";
 import { Request, Response, NextFunction } from "express";
 import redisClient from "../lib/db/redis.js";
 import logger from "../lib/logger.js";
-import { AppError } from "../middlewares/errorMiddleware.js";
+import { AppError } from "./errorMiddleware.js";
 
 interface RateLimiterOptions {
   windowMs: number;

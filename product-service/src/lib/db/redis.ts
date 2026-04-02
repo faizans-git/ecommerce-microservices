@@ -58,8 +58,8 @@ const shutdown = async (signal: string) => {
     process.exit(1);
   }
 };
-
-process.on("SIGINT", () => shutdown("SIGINT"));
-process.on("SIGTERM", () => shutdown("SIGTERM"));
+// add em later
+// process.on("SIGINT", () => shutdown("SIGINT"));
+// process.on("SIGTERM", () => shutdown("SIGTERM"));
 
 export default redis;
