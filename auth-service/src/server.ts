@@ -1,11 +1,10 @@
 import "dotenv/config";
 import express from "express";
-import errorHandler from "./middlewares/errorHandler.js";
 import logger from "./utils/logger.js";
-import router from "./routes/auth.js";
+import router from "./routes/auth-routes.js";
 import cors from "cors";
 import helmet from "helmet";
-import { apiRateLimiter } from "./middlewares/rateLimiter.js";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
 
@@ -18,7 +17,6 @@ app.use(
   }),
 );
 
-app.use(apiRateLimiter);
 app.use("/api/auth", router);
 
 app.use(errorHandler);
