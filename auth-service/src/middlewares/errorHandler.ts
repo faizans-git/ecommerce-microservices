@@ -1,17 +1,42 @@
-import logger from "../utils/logger.js";
 import type { Request, Response, NextFunction } from "express";
+import logger from "../utils/logger.js";
 
-const errorHandler = (
-  error: any,
+class AppError extends Error {
+  statusCode: number;
+  isOperational: boolean;
+  constructor(message: string, statusCode = 500, isOperational = true) {
+    super(message);
+    this.statusCode = statusCode;
+    this.isOperational = isOperational;
+
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+export const errorHandler = (
+  err: any,
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  logger.error(error);
   const isProd = process.env.NODE_ENV === "production";
-  res.status(error.status || 500).json({
-    message: !isProd ? error.message : "Internal server error occurred",
+
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Something went wrong";
+
+  logger.error("Request failed", {
+    message,
+    statusCode,
+    method: req.method,
+    path: req.originalUrl,
+    stack: err.stack,
+  });
+
+  res.status(statusCode).json({
+    success: false,
+    message:
+      isProd && !err.isOperational ? "Internal server error occurred" : message,
   });
 };
 
-export default errorHandler;
+export { AppError };
