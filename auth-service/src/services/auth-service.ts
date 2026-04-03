@@ -58,6 +58,8 @@ export class AuthService {
     if (!isValid) throw new AppError("Invalid OTP", 400);
 
     const verified = await this.authRepo.markAsVerified(user.email);
+    if (!verified) throw new AppError("Verification failed", 500);
+
     return generateTokens(verified!);
   }
 
