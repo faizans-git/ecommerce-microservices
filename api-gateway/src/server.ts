@@ -30,7 +30,6 @@ await connectRedis();
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   logger.info(`API Gateway runnning at: ${PORT}`);
-  console.log("Listening");
 });
 
 process.on("SIGINT", () => shutdown("SIGINT"));

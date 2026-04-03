@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { redisClient } from "./Redis.js";
+import redisClient from "./Redis.js";
 
 const MAX_ATTEMPTS = 5;
 const OTP_EXPIRY_SECONDS = 300;
@@ -15,28 +15,43 @@ export const generateOtp = async (email: string): Promise<string> => {
 };
 
 export const verifyOtp = async (
-  userId: string,
+  email: string,
   code: string,
 ): Promise<boolean> => {
-  const key = `otp:${userId}`;
-  const attemptKey = `otp_attempts:${userId}`;
+  const key = `otp:${email}`;
+  const attemptKey = `otp_attempts:${email}`;
+
+  const recordedOtp = await redisClient.get(key);
+  if (!recordedOtp) {
+    return false;
+  }
 
   const attempts = await redisClient.incr(attemptKey);
   if (attempts === 1) {
     await redisClient.expire(attemptKey, OTP_EXPIRY_SECONDS);
   }
 
-  const recordedOtp = await redisClient.get(key);
-
   if (attempts > MAX_ATTEMPTS) {
     await Promise.all([redisClient.del(key), redisClient.del(attemptKey)]);
     return false;
   }
 
-  if (recordedOtp !== code) {
+  const isMatch = crypto.timingSafeEqual(
+    Buffer.from(recordedOtp),
+    Buffer.from(code),
+  );
+
+  if (!isMatch) {
     return false;
   }
 
   await Promise.all([redisClient.del(key), redisClient.del(attemptKey)]);
   return true;
+};
+
+export const invalidateOtp = async (email: string): Promise<void> => {
+  await Promise.all([
+    redisClient.del(`otp:${email}`),
+    redisClient.del(`otp_attempts:${email}`),
+  ]);
 };
