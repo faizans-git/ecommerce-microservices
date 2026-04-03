@@ -6,15 +6,13 @@ import crypto from "crypto";
 
 export interface TokenPayload {
   userId: string;
-  username: string;
+  email: string;
   role: Role;
 }
 export interface AuthTokens {
   jwtToken: string;
   refreshToken: string;
 }
-
-interface GenerateTokensParams {}
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
@@ -24,7 +22,7 @@ if (!JWT_SECRET) {
 const generateTokens = async (user: User): Promise<AuthTokens> => {
   const payload: TokenPayload = {
     userId: user.id,
-    username: user.username,
+    email: user.email,
     role: user.role,
   };
 

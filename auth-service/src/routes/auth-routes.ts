@@ -1,18 +1,20 @@
 import { Router } from "express";
 import { AuthController } from "../controllers/auth-controller.js";
 import { validate } from "../middlewares/validateMiddleware.js";
-import {
-  registerSchema,
-  loginSchema,
-  verifyOtpSchema,
-  resendOtpSchema,
-  logoutSchema,
-} from "../validators/authValidator.js";
+
 import {
   authLimiter,
+  logoutLimiter,
   otpLimiter,
-  generalLimiter,
 } from "../middlewares/rateLimiter.js";
+import {
+  loginSchema,
+  logoutSchema,
+  registerSchema,
+  resendOtpSchema,
+  verifyOtpSchema,
+} from "../requestDataValidators/validateData.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 const controller = new AuthController();
@@ -21,7 +23,7 @@ router.post(
   "/register",
   authLimiter,
   validate(registerSchema),
-  controller.register,
+  controller.registerUser,
 );
 
 router.post(
@@ -38,13 +40,14 @@ router.post(
   controller.verifyOtp,
 );
 
-router.post("/login", authLimiter, validate(loginSchema), controller.login);
+router.post("/login", authLimiter, validate(loginSchema), controller.loginUser);
 
 router.post(
   "/logout",
-  generalLimiter,
+  authMiddleware,
+  logoutLimiter,
   validate(logoutSchema),
-  controller.logout,
+  controller.logoutUser,
 );
 
 export default router;
