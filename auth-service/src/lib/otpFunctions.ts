@@ -36,10 +36,14 @@ export const verifyOtp = async (
     return false;
   }
 
-  const isMatch = crypto.timingSafeEqual(
-    Buffer.from(recordedOtp),
-    Buffer.from(code),
-  );
+  const recordedBuffer = Buffer.from(recordedOtp);
+  const inputBuffer = Buffer.from(code);
+
+  if (recordedBuffer.length !== inputBuffer.length) {
+    return false;
+  }
+
+  const isMatch = crypto.timingSafeEqual(recordedBuffer, inputBuffer);
 
   if (!isMatch) {
     return false;
