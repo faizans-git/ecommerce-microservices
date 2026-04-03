@@ -30,16 +30,6 @@ export class AuthRepository {
     return prisma.refreshToken.deleteMany({ where: { token } });
   }
 
-  async deleteById(id: string) {
-    try {
-      return await prisma.user.delete({
-        where: { id },
-      });
-    } catch (error) {
-      mapPrismaError(error);
-    }
-  }
-
   async deleteByEmail(email: string) {
     try {
       return await prisma.user.delete({

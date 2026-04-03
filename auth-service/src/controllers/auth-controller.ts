@@ -32,4 +32,4 @@ export class AuthController {
   });
 }
 
-export const authController = new AuthController();
+export const controller = new AuthController();
