@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AuthController } from "../controllers/auth-controller.js";
+import { controller } from "../controllers/auth-controller.js";
 import { validate } from "../middlewares/validateMiddleware.js";
 
 import {
@@ -17,7 +17,6 @@ import {
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = Router();
-const controller = new AuthController();
 
 router.post(
   "/register",

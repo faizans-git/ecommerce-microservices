@@ -9,7 +9,10 @@ export class AuthController {
   });
 
   logoutUser = asyncHandler(async (req: Request, res: Response) => {
-    await authService.logout(req.body.refreshToken);
+    const { userId } = req.user!;
+    const { refreshToken } = req.body;
+
+    await authService.logout(refreshToken, userId);
     res.status(200).json({ success: true, message: "Logged out" });
   });
 
@@ -32,4 +35,4 @@ export class AuthController {
   });
 }
 
-export const authController = new AuthController();
+export const controller = new AuthController();
