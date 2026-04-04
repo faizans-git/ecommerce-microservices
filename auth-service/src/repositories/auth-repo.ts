@@ -26,8 +26,8 @@ export class AuthRepository {
     }
   }
 
-  async deleteRefreshTokens(token: string) {
-    return prisma.refreshToken.deleteMany({ where: { token } });
+  async deleteRefreshTokens(token: string, id: string) {
+    return prisma.refreshToken.deleteMany({ where: { token, id } });
   }
 
   async deleteByEmail(email: string) {

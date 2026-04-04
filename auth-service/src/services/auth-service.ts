@@ -23,8 +23,8 @@ export class AuthService {
     return generateTokens(user);
   }
 
-  async logout(refreshToken: string) {
-    await this.authRepo.deleteRefreshTokens(refreshToken);
+  async logout(refreshToken: string, userId: string) {
+    await this.authRepo.deleteRefreshTokens(refreshToken, userId);
   }
 
   async register(data: RegisterUserInputs) {
