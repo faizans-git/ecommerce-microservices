@@ -9,10 +9,10 @@ export class AuthController {
   });
 
   logoutUser = asyncHandler(async (req: Request, res: Response) => {
-    if (!req.user) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-    await authService.logout(req.body.refreshToken, req?.user.userId);
+    const { userId } = req.user!;
+    const { refreshToken } = req.body;
+
+    await authService.logout(refreshToken, userId);
     res.status(200).json({ success: true, message: "Logged out" });
   });
 
