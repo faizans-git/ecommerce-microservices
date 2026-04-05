@@ -1,6 +1,10 @@
-import redis from "./db/redis";
+import redis from "./db/redis.js";
 
 export const cartCache = {
+  async hGet(key: string, field: string): Promise<string | null> {
+    return await redis.hGet(key, field);
+  },
+
   async hGetAll(key: string): Promise<Record<string, string>> {
     return await redis.hGetAll(key);
   },

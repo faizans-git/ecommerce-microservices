@@ -18,7 +18,7 @@ router.patch(
   cartController.updateItem,
 );
 
-router.delete("/item/:varientId", cartController.removeItem);
+router.delete("/item/:variantId", cartController.removeItem);
 
 router.delete("/clear", cartController.clearCart);
 

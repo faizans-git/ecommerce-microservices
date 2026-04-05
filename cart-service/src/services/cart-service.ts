@@ -1,6 +1,5 @@
 import { cartCache } from "../lib/redisHelper";
-
-// Dont forget to add update variety
+import { AppError } from "../middlewares/errorMiddleware";
 
 interface CartItem {
   variantId: string;
@@ -44,23 +43,34 @@ export class CartService {
   ): Promise<CartItem | null> {
     const key = this.getCartKey(userId);
 
+    const existing = await cartCache.hGet(key, variantId);
+    if (!existing) throw new AppError("Item not in cart", 404);
+
     if (quantity <= 0) {
       await cartCache.hDel(key, variantId);
+      await cartCache.setExpire(key, this.CART_TTL);
       return null;
     }
 
-    await cartCache.hSet(key, variantId, quantity);
-    await cartCache.setExpire(key, this.CART_TTL);
+    await Promise.all([
+      cartCache.hSet(key, variantId, quantity),
+      cartCache.setExpire(key, this.CART_TTL),
+    ]);
 
     return { variantId, quantity };
   }
 
   async removeFromCart(userId: string, variantId: string): Promise<void> {
-    await cartCache.hDel(this.getCartKey(userId), variantId);
+    const key = this.getCartKey(userId);
+    await Promise.all([
+      cartCache.setExpire(key, this.CART_TTL),
+      cartCache.hDel(key, variantId),
+    ]);
   }
 
   async clearUserCart(userId: string): Promise<void> {
-    await cartCache.del(this.getCartKey(userId));
+    const key = this.getCartKey(userId);
+    await cartCache.del(key);
   }
 }
 

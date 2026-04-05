@@ -23,6 +23,8 @@ export class CartController {
       quantity,
     );
 
+    logger.info(`Item updated`, { userId, variantId });
+
     res.status(200).json({
       success: true,
       message: "Item added to cart",
@@ -39,6 +41,12 @@ export class CartController {
       variantId,
       quantity,
     );
+
+    logger.info(`Item updated`, { userId, variantId });
+
+    if (!updatedItem) {
+      return res.status(200).json({ success: true, message: "Item removed" });
+    }
 
     res.status(200).json({
       success: true,
