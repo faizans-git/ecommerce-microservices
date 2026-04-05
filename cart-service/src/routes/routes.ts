@@ -5,8 +5,11 @@ import {
   addToCartSchema,
   updateQuantitySchema,
 } from "../requestDataValidators/cartSchemas.js";
+import { gatewayAuth } from "../middlewares/authMiddleware.js";
 
 const router = Router();
+
+router.use(gatewayAuth);
 
 router.get("/", cartController.getCart);
 

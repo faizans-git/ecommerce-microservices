@@ -6,7 +6,7 @@ import {
   getAllProductsSchema,
   updateProductSchema,
 } from "../validators/productValidator.js";
-import { authMiddleware, isAdmin } from "../middlewares/authMiddleware.js";
+import { gatewayAuth, isAdmin } from "../middlewares/authMiddleware.js";
 import {
   generalLimiter,
   productDeleteLimiter,
@@ -20,7 +20,7 @@ const controller = new ProductController();
 
 router.post(
   "/",
-  authMiddleware,
+  gatewayAuth,
   isAdmin,
   productWriteLimiter,
   validate(createProductSchema),
@@ -38,14 +38,14 @@ router.get("/:id", generalLimiter, controller.getProductById);
 
 router.delete(
   "/:id",
-  authMiddleware,
+  gatewayAuth,
   productDeleteLimiter,
   controller.deleteProduct,
 );
 
 router.patch(
   "/:id",
-  authMiddleware,
+  gatewayAuth,
   isAdmin,
   productMutateLimiter,
   validate(updateProductSchema),

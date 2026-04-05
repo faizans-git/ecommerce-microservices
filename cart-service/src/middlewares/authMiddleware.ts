@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import { AppError } from "./errorMiddleware.js";
-import logger from "../lib/logger.js";
 
 const GATEWAY_SECRET = process.env.GATEWAY_SECRET!;
 if (!GATEWAY_SECRET) throw new Error("GATEWAY_SECRET missing");
@@ -33,15 +32,5 @@ export const gatewayAuth = (
   if (!valid) return next(new AppError("Invalid gateway signature", 401));
 
   req.user = { userId, email, role };
-  next();
-};
-
-export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-  if (req.user?.role !== "Admin") {
-    logger.warn(
-      `Unauthorized person tried to access admin only feature user:${req.user?.userId}`,
-    );
-    return new AppError("Only admins are allowed", 403);
-  }
   next();
 };

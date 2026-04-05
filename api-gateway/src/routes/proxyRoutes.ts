@@ -1,7 +1,9 @@
 // src/routes/proxyRoutes.ts
-import { Router, Request, Response } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { createProxyMiddleware, Options } from "http-proxy-middleware";
 import logger from "../utils/logger.js";
+import { authenticate } from "../middlewares/auth.js";
+import { signUserHeaders } from "../utils/signHeaders.js";
 
 const router = Router();
 
@@ -11,11 +13,17 @@ const SERVICE_URLS = {
   order: process.env.ORDER_SERVICE_URL || "http://localhost:3003",
 };
 
-interface AuthRequest extends Request {
-  user?: {
-    id: string;
-  };
-}
+const PUBLIC_PATHS = [
+  "/api/auth/register",
+  "/api/auth/login",
+  "/api/auth/verify-otp",
+  "/api/auth/resend-otp",
+];
+
+const optionalAuth = (req: Request, res: Response, next: NextFunction) => {
+  if (PUBLIC_PATHS.some((p) => req.path.startsWith(p))) return next();
+  return authenticate(req, res, next);
+};
 
 const commonProxyOptions: Options<Request, Response> = {
   changeOrigin: true,
@@ -24,11 +32,9 @@ const commonProxyOptions: Options<Request, Response> = {
 
   on: {
     error: (err, req, res: any) => {
-      const expressReq = req as Request;
-
       logger.error("Proxy Error", {
         message: err.message,
-        path: expressReq.originalUrl,
+        path: (req as Request).originalUrl,
       });
 
       if (!res.headersSent) {
@@ -40,10 +46,18 @@ const commonProxyOptions: Options<Request, Response> = {
     },
 
     proxyReq: (proxyReq, req) => {
-      const expressReq = req as AuthRequest;
+      const expressReq = req as Request;
 
-      if (expressReq.headers.authorization) {
-        proxyReq.setHeader("Authorization", expressReq.headers.authorization);
+      proxyReq.removeHeader("authorization");
+
+      if (expressReq.user) {
+        const { userId, email, role } = expressReq.user;
+        const sig = signUserHeaders(userId, email, role);
+
+        proxyReq.setHeader("x-user-id", userId);
+        proxyReq.setHeader("x-user-email", email);
+        proxyReq.setHeader("x-user-role", role);
+        proxyReq.setHeader("x-gateway-signature", sig);
       }
 
       if (expressReq.headers["x-request-id"]) {
@@ -52,18 +66,12 @@ const commonProxyOptions: Options<Request, Response> = {
           expressReq.headers["x-request-id"] as string,
         );
       }
-
-      if (expressReq.user?.id) {
-        proxyReq.setHeader("x-user-id", expressReq.user.id);
-      }
     },
 
     proxyRes: (proxyRes, req) => {
-      const expressReq = req as Request;
-
       logger.info("Proxy Response", {
-        path: expressReq.originalUrl,
-        method: expressReq.method,
+        path: (req as Request).originalUrl,
+        method: (req as Request).method,
         status: proxyRes.statusCode,
       });
     },
@@ -72,6 +80,7 @@ const commonProxyOptions: Options<Request, Response> = {
 
 router.use(
   "/api/auth",
+  optionalAuth,
   createProxyMiddleware({
     ...commonProxyOptions,
     target: SERVICE_URLS.auth,
@@ -81,6 +90,7 @@ router.use(
 
 router.use(
   "/api/products",
+  optionalAuth,
   createProxyMiddleware({
     ...commonProxyOptions,
     target: SERVICE_URLS.product,
@@ -90,6 +100,7 @@ router.use(
 
 router.use(
   "/api/orders",
+  authenticate,
   createProxyMiddleware({
     ...commonProxyOptions,
     target: SERVICE_URLS.order,
