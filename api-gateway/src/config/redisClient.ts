@@ -34,9 +34,10 @@ process.on("SIGINT", async () => {
 export const connectRedis = async () => {
   try {
     await redisClient.connect();
-    logger.info("Reddis connected");
+    logger.info("Redis connected");
   } catch (err) {
     logger.error("Redis connection failed", { err });
+    process.exit(1);
   }
 };
 

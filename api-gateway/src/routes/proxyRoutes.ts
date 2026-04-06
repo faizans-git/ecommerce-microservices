@@ -1,9 +1,9 @@
-// src/routes/proxyRoutes.ts
 import { Router, Request, Response, NextFunction } from "express";
 import { createProxyMiddleware, Options } from "http-proxy-middleware";
 import logger from "../utils/logger.js";
 import { authenticate } from "../middlewares/auth.js";
 import { signUserHeaders } from "../utils/signHeaders.js";
+import { authLimiter, generalLimiter } from "../middlewares/rateLimiter.js";
 
 const router = Router();
 
@@ -21,7 +21,7 @@ const PUBLIC_PATHS = [
 ];
 
 const optionalAuth = (req: Request, res: Response, next: NextFunction) => {
-  if (PUBLIC_PATHS.some((p) => req.path.startsWith(p))) return next();
+  if (PUBLIC_PATHS.some((p) => req.originalUrl.startsWith(p))) return next();
   return authenticate(req, res, next);
 };
 
@@ -79,32 +79,35 @@ const commonProxyOptions: Options<Request, Response> = {
 };
 
 router.use(
-  "/api/auth",
+  "/auth",
   optionalAuth,
+  authLimiter,
   createProxyMiddleware({
     ...commonProxyOptions,
     target: SERVICE_URLS.auth,
-    pathRewrite: { "^/api/auth": "" },
+    pathRewrite: { "^/auth": "" },
   }),
 );
 
 router.use(
-  "/api/products",
+  "/products",
   optionalAuth,
+  generalLimiter,
   createProxyMiddleware({
     ...commonProxyOptions,
     target: SERVICE_URLS.product,
-    pathRewrite: { "^/api/products": "" },
+    pathRewrite: { "^/products": "" },
   }),
 );
 
 router.use(
-  "/api/orders",
+  "/orders",
   authenticate,
+  generalLimiter,
   createProxyMiddleware({
     ...commonProxyOptions,
     target: SERVICE_URLS.order,
-    pathRewrite: { "^/api/orders": "" },
+    pathRewrite: { "^/orders": "" },
   }),
 );
 

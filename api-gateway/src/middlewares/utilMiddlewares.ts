@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import logger from "../utils/logger.js";
+import { AppError } from "./errorHandler.js";
 
 export const requestLogger = (
   req: Request,
@@ -14,11 +15,12 @@ export const requestLogger = (
   next();
 };
 
-export const notFound = (req: Request, res: Response) => {
+export const notFound = (req: Request, res: Response, next: NextFunction) => {
   logger.warn(`404 - Not Found: ${req.method} ${req.originalUrl}`);
 
-  res.status(404).json({
-    success: false,
-    message: "Not a valid url",
-  });
+  const error = new AppError(
+    `Can't find ${req.originalUrl} on this server`,
+    404,
+  );
+  next(error);
 };

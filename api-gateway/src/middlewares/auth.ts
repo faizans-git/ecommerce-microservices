@@ -1,4 +1,3 @@
-// src/middlewares/authenticate.ts
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { AppError } from "./errorHandler.js";
@@ -17,6 +16,9 @@ declare global {
   }
 }
 
+const secret = process.env.JWT_SECRET;
+if (!secret) throw new Error("JWT_SECRET missing");
+
 export const authenticate = (
   req: Request,
   res: Response,
@@ -29,8 +31,6 @@ export const authenticate = (
     }
 
     const token = header.split(" ")[1];
-    const secret = process.env.JWT_SECRET;
-    if (!secret) throw new Error("JWT_SECRET missing");
 
     const decoded = jwt.verify(token, secret) as TokenPayload;
     req.user = decoded;

@@ -11,14 +11,8 @@ interface RateLimiterOptions {
   message?: string;
 }
 
-interface AuthRequest extends Request {
-  user?: {
-    id: string;
-  };
-}
-
-const createKey = (req: AuthRequest) => {
-  const userId = req.user?.id;
+const createKey = (req: Request) => {
+  const userId = req.user?.userId;
   return userId ? `user:${userId}` : `ip:${req.ip}`;
 };
 
@@ -32,9 +26,9 @@ const createHandler =
 
     res.setHeader("Retry-After", Math.ceil(options.windowMs / 1000));
 
-    return res.status(429).json({
+    res.status(429).json({
       success: false,
-      message: options.message || "Too many requests. Try again later.",
+      message: options.message ?? "Too many requests. Try again later.",
     });
   };
 
@@ -44,7 +38,6 @@ export const createRateLimiter = (options: RateLimiterOptions) => {
     limit: options.max,
     standardHeaders: "draft-7",
     legacyHeaders: false,
-
     store: new RedisStore({
       sendCommand: async (
         command: string,
@@ -55,7 +48,6 @@ export const createRateLimiter = (options: RateLimiterOptions) => {
       },
       prefix: `rl:${options.prefix}:`,
     }),
-
     keyGenerator: createKey,
     handler: createHandler(options),
   });
@@ -65,7 +57,6 @@ export const createRateLimiter = (options: RateLimiterOptions) => {
     limit: options.max,
     standardHeaders: "draft-7",
     legacyHeaders: false,
-
     keyGenerator: createKey,
     handler: createHandler(options),
   });
