@@ -19,7 +19,7 @@ app.get("/health", (_req, res) => {
   res.status(200).json({ status: "OK" });
 });
 
-app.use("/api/v1/products", router);
+app.use("/api/products", router);
 
 app.use((req, res) => {
   res.status(404).json({

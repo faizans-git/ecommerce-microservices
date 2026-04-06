@@ -5,6 +5,7 @@ import helmet from "helmet";
 import { errorHandler } from "./middlewares/errorMiddleware.js";
 import logger from "./lib/logger.js";
 import { requestLogger } from "./middlewares/requestLogger.js";
+import cartRoutes from "./routes/routes.js";
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(requestLogger);
 app.get("/health", (_req, res) => {
   res.status(200).json({ status: "OK" });
 });
+
+app.use("/api/cart", cartRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

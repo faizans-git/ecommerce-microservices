@@ -107,7 +107,7 @@ router.use(
   createProxyMiddleware({
     ...commonProxyOptions,
     target: SERVICE_URLS.order,
-    pathRewrite: { "^/orders": "" },
+    pathRewrite: { "^/api/orders": "" },
   }),
 );
 
