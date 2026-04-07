@@ -10,7 +10,7 @@ const router = Router();
 const SERVICE_URLS = {
   auth: process.env.AUTH_SERVICE_URL || "http://localhost:3001",
   product: process.env.PRODUCT_SERVICE_URL || "http://localhost:3002",
-  order: process.env.ORDER_SERVICE_URL || "http://localhost:3003",
+  cart: process.env.CART_SERVICE_URL || "http://localhost:3003",
 };
 
 const PUBLIC_PATHS = [
@@ -85,7 +85,7 @@ router.use(
   createProxyMiddleware({
     ...commonProxyOptions,
     target: SERVICE_URLS.auth,
-    pathRewrite: { "^/auth": "" },
+    pathRewrite: { "^": "/api/auth" },
   }),
 );
 
@@ -96,18 +96,18 @@ router.use(
   createProxyMiddleware({
     ...commonProxyOptions,
     target: SERVICE_URLS.product,
-    pathRewrite: { "^/products": "" },
+    pathRewrite: { "^": "/api/products" },
   }),
 );
 
 router.use(
-  "/orders",
+  "/cart",
   authenticate,
   generalLimiter,
   createProxyMiddleware({
     ...commonProxyOptions,
-    target: SERVICE_URLS.order,
-    pathRewrite: { "^/api/orders": "" },
+    target: SERVICE_URLS.cart,
+    pathRewrite: { "^": "/api/cart" },
   }),
 );
 
