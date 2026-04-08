@@ -13,7 +13,7 @@ interface RateLimiterOptions {
 }
 
 const createKey = (req: Request) => {
-  const userId = req.user?.id;
+  const userId = req.user?.userId;
   return userId ? `user:${userId}` : `ip:${req.ip}`;
 };
 
@@ -74,36 +74,20 @@ export const createRateLimiter = (options: RateLimiterOptions) => {
   };
 };
 
-export const generalLimiter = createRateLimiter({
+export const orderReadLimiter = createRateLimiter({
   windowMs: 15 * 60 * 1000,
   max: 100,
-  prefix: "general",
+  prefix: "order",
 });
 
-export const productReadLimiter = createRateLimiter({
-  windowMs: 60 * 1000,
-  max: 60,
-  prefix: "limit:product:read",
-  message: "Too many read requests. Try again later.",
+export const orderWriteLimiter = createRateLimiter({
+  windowMs: 10 * 60 * 1000,
+  max: 20,
+  prefix: "order",
 });
 
-export const productWriteLimiter = createRateLimiter({
-  windowMs: 60 * 1000,
-  max: 30,
-  prefix: "limit:product:write",
-  message: "Too many write requests. Try again later.",
-});
-
-export const productMutateLimiter = createRateLimiter({
-  windowMs: 60 * 1000,
-  max: 30,
-  prefix: "limit:product:mutate",
-  message: "Too many requests. Try again later.",
-});
-
-export const productDeleteLimiter = createRateLimiter({
-  windowMs: 60 * 1000,
-  max: 30,
-  prefix: "limit:product:delete",
-  message: "Too many delete requests. Try again later.",
+export const orderMutatationLimiter = createRateLimiter({
+  windowMs: 10 * 60 * 1000,
+  max: 15,
+  prefix: "order",
 });
