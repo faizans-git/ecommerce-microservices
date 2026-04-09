@@ -1,37 +1,125 @@
-// services/order-service.ts
+import { cache } from "../lib/cacheHelper.js";
 import { AppError } from "../middlewares/errorMiddleware.js";
 import { orderRepository } from "../repositories/order-repository.js";
+import logger from "../lib/logger.js";
+import {
+  CreateOrderDTO,
+  OrderStatus,
+  PrismaOrderWithItems,
+} from "../types/orderTypes.js";
 
 export class OrderService {
-  async createOrder(userId: string, body: any) {
-    return orderRepository.create({ userId, ...body, status: "PENDING" });
+  private assertOwnership(order: PrismaOrderWithItems, userId: string): void {
+    if (order.userId !== userId) {
+      throw new AppError("Forbidden", 403);
+    }
   }
 
-  async getOrdersByUser(userId: string) {
-    return orderRepository.findByUserId(userId);
+  private canCancel(status: OrderStatus): boolean {
+    return [OrderStatus.PENDING, OrderStatus.CONFIRMED].includes(status);
   }
 
-  async getOrderById(orderId: string, userId: string) {
-    const order = await orderRepository.findById(orderId);
-    if (!order) throw new AppError("Order not found", 404);
-    if (order.userId !== userId) throw new AppError("Forbidden", 403);
+  private async invalidateUserOrderCache(
+    userId: string,
+    orderId?: string,
+  ): Promise<void> {
+    const ops: Promise<unknown>[] = [
+      cache.deletePattern(`orders:list:${userId}`),
+    ];
+    if (orderId) ops.push(cache.del(`order:${orderId}`));
+    await Promise.all(ops);
+  }
+
+  async createOrder(
+    userId: string,
+    body: CreateOrderDTO,
+  ): Promise<PrismaOrderWithItems> {
+    const order = await orderRepository.create({
+      userId,
+      ...body,
+      status: OrderStatus.PENDING,
+    });
+
+    await this.invalidateUserOrderCache(userId);
+    logger.info("Order created", { userId, orderId: order.id });
+
     return order;
   }
 
-  async cancelOrder(orderId: string, userId: string) {
-    const order = await orderRepository.findById(orderId);
-    if (!order) throw new AppError("Order not found", 404);
-    if (order.userId !== userId) throw new AppError("Forbidden", 403);
-    if (!["PENDING", "CONFIRMED"].includes(order.status)) {
-      throw new AppError("Order cannot be cancelled at this stage", 400);
-    }
-    return orderRepository.updateStatus(orderId, "CANCELLED");
+  async getOrdersByUser(userId: string): Promise<PrismaOrderWithItems[]> {
+    const cacheKey = `orders:list:${userId}`;
+
+    const cached = await cache.get<PrismaOrderWithItems[]>(cacheKey);
+    if (cached) return cached;
+
+    const orders = await orderRepository.findByUserId(userId);
+    await cache.set(cacheKey, orders, 100);
+
+    return orders;
   }
 
-  async updateStatus(orderId: string, status: string) {
+  async getOrderById(
+    orderId: string,
+    userId: string,
+  ): Promise<PrismaOrderWithItems> {
+    const cacheKey = `order:${orderId}`;
+
+    const cached = await cache.get<PrismaOrderWithItems>(cacheKey);
+    if (cached) {
+      this.assertOwnership(cached, userId);
+      return cached;
+    }
+
     const order = await orderRepository.findById(orderId);
     if (!order) throw new AppError("Order not found", 404);
-    return orderRepository.updateStatus(orderId, status);
+
+    this.assertOwnership(order, userId);
+    await cache.set(cacheKey, order, 300);
+
+    return order;
+  }
+
+  async cancelOrder(
+    orderId: string,
+    userId: string,
+  ): Promise<PrismaOrderWithItems> {
+    const order = await orderRepository.findById(orderId);
+    if (!order) throw new AppError("Order not found", 404);
+
+    this.assertOwnership(order, userId);
+
+    if (!this.canCancel(order.status as OrderStatus)) {
+      throw new AppError("Order cannot be cancelled at this stage", 400);
+    }
+
+    const updated = await orderRepository.updateStatus(
+      orderId,
+      OrderStatus.CANCELLED,
+    );
+
+    await this.invalidateUserOrderCache(order.userId, orderId);
+    logger.info("Order cancelled", { userId, orderId });
+
+    return updated;
+  }
+
+  async updateStatus(
+    orderId: string,
+    status: OrderStatus,
+  ): Promise<PrismaOrderWithItems> {
+    const order = await orderRepository.findById(orderId);
+    if (!order) throw new AppError("Order not found", 404);
+
+    const updated = await orderRepository.updateStatus(orderId, status);
+
+    await this.invalidateUserOrderCache(order.userId, orderId);
+    logger.info("Order status updated", {
+      orderId,
+      userId: order.userId,
+      status,
+    });
+
+    return updated;
   }
 }
 
