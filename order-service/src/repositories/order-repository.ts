@@ -11,7 +11,8 @@ export class OrderRepository {
       data: {
         userId: data.userId,
         status: data.status,
-        shippingAddress: data.shippingAddress as any, // Prisma stores as Json
+        totalAmount: data.totalAmount,
+        shippingAddress: data.shippingAddress as object,
         items: {
           create: data.items.map((item) => ({
             variantId: item.variantId,
