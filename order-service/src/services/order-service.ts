@@ -1,18 +1,19 @@
+// services/order-service.ts
 import { cache } from "../lib/cacheHelper.js";
 import { AppError } from "../middlewares/errorMiddleware.js";
 import { orderRepository } from "../repositories/order-repository.js";
+import { getVariantsByIds } from "../lib/productServiceClient.js";
 import logger from "../lib/logger.js";
 import {
   CreateOrderDTO,
+  CreateOrderItemResolved,
   OrderStatus,
   PrismaOrderWithItems,
 } from "../types/orderTypes.js";
 
 export class OrderService {
   private assertOwnership(order: PrismaOrderWithItems, userId: string): void {
-    if (order.userId !== userId) {
-      throw new AppError("Forbidden", 403);
-    }
+    if (order.userId !== userId) throw new AppError("Forbidden", 403);
   }
 
   private canCancel(status: OrderStatus): boolean {
@@ -34,27 +35,57 @@ export class OrderService {
     userId: string,
     body: CreateOrderDTO,
   ): Promise<PrismaOrderWithItems> {
+    const variantIds = body.items.map((i) => i.variantId);
+
+    const variantMap = await getVariantsByIds(variantIds);
+
+    const resolvedItems: CreateOrderItemResolved[] = body.items.map((item) => {
+      const variant = variantMap.get(item.variantId);
+
+      if (!variant) {
+        throw new AppError(`Product variant ${item.variantId} not found`, 404);
+      }
+
+      if (variant.stock < item.quantity) {
+        throw new AppError(
+          `Insufficient stock for variant ${item.variantId}`,
+          400,
+        );
+      }
+
+      return {
+        variantId: item.variantId,
+        quantity: item.quantity,
+        price: variant.price,
+      };
+    });
+
+    const totalAmount = resolvedItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
+
     const order = await orderRepository.create({
       userId,
-      ...body,
       status: OrderStatus.PENDING,
+      items: resolvedItems,
+      shippingAddress: body.shippingAddress,
+      totalAmount,
     });
 
     await this.invalidateUserOrderCache(userId);
-    logger.info("Order created", { userId, orderId: order.id });
+    logger.info("Order created", { userId, orderId: order.id, totalAmount });
 
     return order;
   }
 
   async getOrdersByUser(userId: string): Promise<PrismaOrderWithItems[]> {
     const cacheKey = `orders:list:${userId}`;
-
     const cached = await cache.get<PrismaOrderWithItems[]>(cacheKey);
     if (cached) return cached;
 
     const orders = await orderRepository.findByUserId(userId);
     await cache.set(cacheKey, orders, 100);
-
     return orders;
   }
 
@@ -63,7 +94,6 @@ export class OrderService {
     userId: string,
   ): Promise<PrismaOrderWithItems> {
     const cacheKey = `order:${orderId}`;
-
     const cached = await cache.get<PrismaOrderWithItems>(cacheKey);
     if (cached) {
       this.assertOwnership(cached, userId);
@@ -75,7 +105,6 @@ export class OrderService {
 
     this.assertOwnership(order, userId);
     await cache.set(cacheKey, order, 300);
-
     return order;
   }
 
@@ -99,7 +128,6 @@ export class OrderService {
 
     await this.invalidateUserOrderCache(order.userId, orderId);
     logger.info("Order cancelled", { userId, orderId });
-
     return updated;
   }
 
@@ -118,7 +146,6 @@ export class OrderService {
       userId: order.userId,
       status,
     });
-
     return updated;
   }
 }

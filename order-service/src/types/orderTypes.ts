@@ -1,4 +1,4 @@
-import { Prisma } from "../generated/prisma/client.js";
+import type { Order, OrderItem } from "../generated/prisma/client.js";
 
 export enum OrderStatus {
   PENDING = "PENDING",
@@ -8,24 +8,6 @@ export enum OrderStatus {
   CANCELLED = "CANCELLED",
 }
 
-export interface OrderItem {
-  id: string;
-  orderId: string;
-  variantId: string;
-  quantity: number;
-  price: number;
-}
-
-export interface Order {
-  id: string;
-  userId: string;
-  status: OrderStatus;
-  shippingAddress: ShippingAddress;
-  items: OrderItem[];
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 export interface ShippingAddress {
   street: string;
   city: string;
@@ -33,24 +15,28 @@ export interface ShippingAddress {
   zip: string;
 }
 
-export interface CreateOrderItemDTO {
+export interface CreateOrderItemInput {
+  variantId: string;
+  quantity: number;
+}
+
+export interface CreateOrderDTO {
+  items: CreateOrderItemInput[];
+  shippingAddress: ShippingAddress;
+}
+
+export interface CreateOrderItemResolved {
   variantId: string;
   quantity: number;
   price: number;
 }
 
-export interface CreateOrderDTO {
-  items: CreateOrderItemDTO[];
-  shippingAddress: ShippingAddress;
-}
-
 export interface CreateOrderRepoInput {
   userId: string;
   status: OrderStatus;
-  items: CreateOrderItemDTO[];
+  items: CreateOrderItemResolved[];
   shippingAddress: ShippingAddress;
+  totalAmount: number;
 }
 
-export type PrismaOrderWithItems = Prisma.OrderGetPayload<{
-  include: { items: true };
-}>;
+export type PrismaOrderWithItems = Order & { items: OrderItem[] };

@@ -6,7 +6,6 @@ export const createOrderSchema = Joi.object({
       Joi.object({
         variantId: Joi.string().uuid().required(),
         quantity: Joi.number().integer().min(1).max(90).required(),
-        price: Joi.number().positive().required(),
       }),
     )
     .min(1)
