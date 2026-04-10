@@ -42,6 +42,40 @@ export class ProductRepository {
     };
   }
 
+  async getVariantsByIds(variantIds: string[]) {
+    try {
+      return await prisma.productVariant.findMany({
+        where: { id: { in: variantIds } },
+        select: { id: true, sku: true, price: true, stock: true },
+      });
+    } catch (error) {
+      throw mapPrismaError(error);
+    }
+  }
+
+  async reserveStock(variantId: string, quantity: number): Promise<boolean> {
+    try {
+      const result = await prisma.productVariant.updateMany({
+        where: { id: variantId, stock: { gte: quantity } },
+        data: { stock: { decrement: quantity } },
+      });
+      return result.count > 0;
+    } catch (error) {
+      throw mapPrismaError(error);
+    }
+  }
+
+  async releaseStock(variantId: string, quantity: number): Promise<void> {
+    try {
+      await prisma.productVariant.update({
+        where: { id: variantId },
+        data: { stock: { increment: quantity } },
+      });
+    } catch (error) {
+      throw mapPrismaError(error);
+    }
+  }
+
   async createProduct(data: ProductDTO) {
     try {
       return await prisma.product.create({

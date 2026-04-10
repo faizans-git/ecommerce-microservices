@@ -32,9 +32,22 @@ export class ProductService {
     const existing = await this.repo.existsBySlug(data.slug);
     if (existing) throw new AppError("Product slug already exists", 400);
 
-    const createdProduct = await this.repo.createProduct(data);
-    await cache.deletePattern(`products:list:*`);
-    return createdProduct;
+    const created = await this.repo.createProduct(data);
+    await cache.deletePattern("products:list:*");
+    return created;
+  }
+
+  async getVariantsByIds(variantIds: string[]) {
+    if (variantIds.length === 0) return [];
+    return this.repo.getVariantsByIds(variantIds);
+  }
+
+  async reserveStock(variantId: string, quantity: number): Promise<boolean> {
+    return this.repo.reserveStock(variantId, quantity);
+  }
+
+  async releaseStock(variantId: string, quantity: number): Promise<void> {
+    await this.repo.releaseStock(variantId, quantity);
   }
 
   async updateProduct(id: string, data: UpdateProductDTO) {
@@ -68,8 +81,8 @@ export class ProductService {
 
   async getAllProducts(options?: GetProductsParams) {
     const cacheKey = this.buildListCacheKey(options);
-    const cachedData = await cache.get<ProductListResponse>(cacheKey);
-    if (cachedData) return cachedData;
+    const cached = await cache.get<ProductListResponse>(cacheKey);
+    if (cached) return cached;
 
     const page = options?.page ?? 1;
     const limit = options?.limit ?? 20;
@@ -94,12 +107,7 @@ export class ProductService {
 
     const result = {
       data: products,
-      meta: {
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-      },
+      meta: { total, page, limit, totalPages: Math.ceil(total / limit) },
     };
 
     await cache.set(cacheKey, result, 300);
