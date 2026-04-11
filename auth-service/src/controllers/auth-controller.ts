@@ -22,11 +22,22 @@ export class AuthController {
   });
 
   verifyOtp = asyncHandler(async (req: Request, res: Response) => {
-    const tokens = await authService.verifyOtpCode(
+    const { jwtToken, refreshToken } = await authService.verifyOtpCode(
       req.body.email,
       req.body.otp,
     );
-    res.status(200).json({ success: true, ...tokens });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "prod",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(200).json({
+      success: true,
+      accessToken: jwtToken,
+    });
   });
 
   resendOtp = asyncHandler(async (req: Request, res: Response) => {

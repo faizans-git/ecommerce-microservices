@@ -261,3 +261,78 @@
 {"level":"warn","message":"Invalid OTP attempt for user: faixandisjoint@gmail.com","service":"Api-gateway","timestamp":"2026-03-31T10:04:56.205Z"}
 {"level":"warn","message":"Invalid OTP attempt for user: faixandisjoint@gmail.com","service":"Api-gateway","timestamp":"2026-03-31T10:04:57.213Z"}
 {"level":"info","message":"Tokens generated for user cmnefyidn0000ehgomlu0oiob","service":"Api-gateway","timestamp":"2026-03-31T10:05:24.787Z"}
+{"level":"error","message":"Redis Client Error AggregateError","service":"Api-gateway","timestamp":"2026-04-11T09:49:10.624Z"}
+{"level":"error","message":"Redis Client Error AggregateError","service":"Api-gateway","timestamp":"2026-04-11T09:49:10.876Z"}
+{"level":"error","message":"Redis Client Error AggregateError","service":"Api-gateway","timestamp":"2026-04-11T09:49:11.134Z"}
+{"level":"error","message":"Redis Client Error AggregateError","service":"Api-gateway","timestamp":"2026-04-11T09:49:11.342Z"}
+{"level":"error","message":"Redis Client Error AggregateError","service":"Api-gateway","timestamp":"2026-04-11T09:49:11.928Z"}
+{"level":"error","message":"Redis Client Error AggregateError","service":"Api-gateway","timestamp":"2026-04-11T09:49:12.920Z"}
+{"level":"info","message":"Auth service running at 3001","service":"auth-service","timestamp":"2026-04-11T09:51:45.713Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:45.731Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:51:45.943Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:45.945Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:51:46.222Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:46.224Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:51:46.502Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:46.507Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:51:47.075Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:47.078Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:51:48.072Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:48.074Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:51:49.838Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:49.841Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:51:52.009Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:52.011Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:51:54.033Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:54.036Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:51:56.217Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:56.219Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:51:58.264Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:51:58.266Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:00.360Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:00.362Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:02.441Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:02.443Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:04.523Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:04.525Z"}
+{"level":"info","message":"Auth service running at 3001","service":"auth-service","timestamp":"2026-04-11T09:52:05.841Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:05.848Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:06.105Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:06.107Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:06.352Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:06.353Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:06.726Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:06.730Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:07.276Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:07.277Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:08.125Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:08.127Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:09.747Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:09.748Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:11.930Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:11.931Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:13.980Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:13.983Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:16.134Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:16.136Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:18.243Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:18.245Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:20.405Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:20.407Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:22.584Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:22.587Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:24.590Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:24.593Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:26.654Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:26.655Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:28.782Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:6379","service":"auth-service","stack":"Error: connect ECONNREFUSED 127.0.0.1:6379\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)","timestamp":"2026-04-11T09:52:28.784Z"}
+{"level":"warn","message":"Redis reconnecting...","service":"auth-service","timestamp":"2026-04-11T09:52:30.894Z"}
+{"level":"info","message":"Redis connected","service":"auth-service","timestamp":"2026-04-11T09:52:30.897Z"}
+{"level":"info","message":"Redis ready","service":"auth-service","timestamp":"2026-04-11T09:52:30.910Z"}
+{"level":"info","message":"Auth service running at 3001","service":"auth-service","timestamp":"2026-04-11T13:55:51.706Z"}
+{"level":"info","message":"Redis connected","service":"auth-service","timestamp":"2026-04-11T13:55:51.714Z"}
+{"level":"info","message":"Redis ready","service":"auth-service","timestamp":"2026-04-11T13:55:51.721Z"}
+{"level":"info","message":"Auth service running at 3001","service":"auth-service","timestamp":"2026-04-11T13:56:05.577Z"}
+{"level":"info","message":"Redis connected","service":"auth-service","timestamp":"2026-04-11T13:56:05.614Z"}
+{"level":"info","message":"Redis ready","service":"auth-service","timestamp":"2026-04-11T13:56:05.622Z"}

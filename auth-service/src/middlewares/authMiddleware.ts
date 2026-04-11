@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import jwt, { TokenExpiredError, JsonWebTokenError } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { AppError } from "./errorHandler.js";
 import { TokenPayload } from "../lib/generateToken.js";
 
@@ -40,14 +40,6 @@ export const authMiddleware = (
 
     next();
   } catch (error) {
-    if (error instanceof TokenExpiredError) {
-      return next(new AppError("Token expired", 401));
-    }
-
-    if (error instanceof JsonWebTokenError) {
-      return next(new AppError("Invalid token", 401));
-    }
-
-    return next(error);
+    return next(new AppError("Invalid token or Token expired", 401));
   }
 };
