@@ -11,7 +11,12 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 const app = express();
 
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:4000",
+    credentials: true,
+  }),
+);
 app.use(requestLogger);
 
 app.use("/api", router);

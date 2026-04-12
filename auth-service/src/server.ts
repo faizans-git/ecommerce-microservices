@@ -13,7 +13,7 @@ app.use(helmet());
 // will change it befire deplowment not now
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:4000",
     credentials: true,
   }),
 );
