@@ -31,14 +31,4 @@ process.on("SIGINT", async () => {
   process.exit(0);
 });
 
-export const connectRedis = async () => {
-  try {
-    await redisClient.connect();
-    logger.info("Redis connected");
-  } catch (err) {
-    logger.error("Redis connection failed", { err });
-    process.exit(1);
-  }
-};
-
 export default redisClient;
