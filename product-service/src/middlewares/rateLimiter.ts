@@ -1,4 +1,4 @@
-import rateLimit from "express-rate-limit";
+import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import { RedisStore, RedisReply } from "rate-limit-redis";
 import { Request, Response, NextFunction } from "express";
 import redisClient from "../lib/db/redis.js";
@@ -12,9 +12,11 @@ interface RateLimiterOptions {
   message?: string;
 }
 
-const createKey = (req: Request) => {
-  const userId = req.user?.id;
-  return userId ? `user:${userId}` : `ip:${req.ip}`;
+const createKey = (req: Request): string => {
+  const userId = req.user?.userId;
+  if (userId) return `user:${userId}`;
+  const ip = req.ip || req.socket?.remoteAddress || "anonymous";
+  return `ip:${ipKeyGenerator(ip)}`;
 };
 
 const createHandler =
