@@ -44,6 +44,22 @@ export class AuthController {
     await authService.resendOtpCode(req.body.email);
     res.status(200).json({ success: true, message: "OTP resent" });
   });
+
+  forgotPassword = asyncHandler(async (req: Request, res: Response) => {
+    await authService.forgotPassword(req.body.email);
+    res.status(200).json({
+      success: true,
+      message: "If that email is registered, a reset link has been sent",
+    });
+  });
+
+  resetPassword = asyncHandler(async (req: Request, res: Response) => {
+    const { email, token, newPassword } = req.body;
+    await authService.resetPassword(email, token, newPassword);
+    res
+      .status(200)
+      .json({ success: true, message: "Password reset successful" });
+  });
 }
 
 export const controller = new AuthController();

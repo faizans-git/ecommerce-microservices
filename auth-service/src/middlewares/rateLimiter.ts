@@ -103,3 +103,10 @@ export const generalAuthLimiter = createRateLimiter({
   prefix: "limit:auth:general",
   message: "Too many requests. Try again later.",
 });
+
+export const passwordResetLimiter = createRateLimiter({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  message: "Too many requests, try again later",
+  prefix: "limit:auth:reset",
+});

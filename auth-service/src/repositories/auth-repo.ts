@@ -39,6 +39,19 @@ export class AuthRepository {
       mapPrismaError(error);
     }
   }
+
+  async updatePassword(email: string, hashedPassword: string) {
+    return prisma.user.update({
+      where: { email },
+      data: { password: hashedPassword },
+    });
+  }
+
+  async deleteAllRefreshTokensByEmail(email: string) {
+    return prisma.refreshToken.deleteMany({
+      where: { user: { email } },
+    });
+  }
 }
 
 export const authRepository = new AuthRepository();

@@ -6,12 +6,15 @@ import {
   authLimiter,
   logoutLimiter,
   otpLimiter,
+  passwordResetLimiter,
 } from "../middlewares/rateLimiter.js";
 import {
+  forgotPasswordSchema,
   loginSchema,
   logoutSchema,
   registerSchema,
   resendOtpSchema,
+  resetPasswordSchema,
   verifyOtpSchema,
 } from "../requestDataValidators/validateData.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
@@ -47,6 +50,20 @@ router.post(
   logoutLimiter,
   validate(logoutSchema),
   controller.logoutUser,
+);
+
+router.post(
+  "/forgot-password",
+  passwordResetLimiter,
+  validate(forgotPasswordSchema),
+  controller.forgotPassword,
+);
+
+router.post(
+  "/reset-password",
+  passwordResetLimiter,
+  validate(resetPasswordSchema),
+  controller.resetPassword,
 );
 
 export default router;

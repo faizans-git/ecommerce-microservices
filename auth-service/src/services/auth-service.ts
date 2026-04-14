@@ -3,8 +3,12 @@ import { AppError } from "../middlewares/errorHandler.js";
 import generateTokens from "../lib/generateToken.js";
 import { hashPassword, verifyPassword } from "../utils/password.js";
 import { generateOtp, invalidateOtp, verifyOtp } from "../lib/otpFunctions.js";
-import { sendOtpEmail } from "../lib/emailService.js";
+import { sendOtpEmail, sendPasswordResetEmail } from "../lib/emailService.js";
 import type { RegisterUserInputs, LoginUserInputs } from "../types/auth.js";
+import {
+  generateResetToken,
+  verifyResetToken,
+} from "../lib/passwordResetToken.js";
 
 export class AuthService {
   constructor(private authRepo: AuthRepository) {}
@@ -72,6 +76,40 @@ export class AuthService {
     await invalidateOtp(email);
     const otp = await generateOtp(email);
     await sendOtpEmail(email, otp);
+  }
+
+  async forgotPassword(email: string): Promise<void> {
+    const user = await this.authRepo.findByEmail(email);
+
+    if (!user || !user.isVerified) return;
+
+    const rawToken = await generateResetToken(email);
+
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${rawToken}&email=${encodeURIComponent(email)}`;
+
+    await sendPasswordResetEmail(email, resetUrl);
+  }
+
+  async resetPassword(
+    email: string,
+    token: string,
+    newPassword: string,
+  ): Promise<void> {
+    const isValid = await verifyResetToken(email, token);
+    if (!isValid) throw new AppError("Invalid or expired reset link", 400);
+
+    const user = await this.authRepo.findByEmail(email);
+    if (!user) throw new AppError("Invalid or expired reset link", 400);
+
+    const isSamePassword = await verifyPassword(user.password, newPassword);
+    if (isSamePassword) {
+      throw new AppError("New password must differ from the current one", 400);
+    }
+
+    const hashedPassword = await hashPassword(newPassword);
+    await this.authRepo.updatePassword(email, hashedPassword);
+
+    await this.authRepo.deleteAllRefreshTokensByEmail(email);
   }
 }
 

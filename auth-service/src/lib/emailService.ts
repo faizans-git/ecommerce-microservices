@@ -13,3 +13,18 @@ export const sendOtpEmail = async (email: string, otp: string) => {
     `,
   });
 };
+
+export const sendPasswordResetEmail = async (
+  email: string,
+  resetUrl: string,
+): Promise<void> => {
+  await transporter.sendMail({
+    to: email,
+    subject: "Reset your password",
+    html: `
+      <p>You requested a password reset. This link expires in 15 minutes.</p>
+      <a href="${resetUrl}">Reset Password</a>
+      <p>If you didn't request this, ignore this email — your password won't change.</p>
+    `,
+  });
+};
