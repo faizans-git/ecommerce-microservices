@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { asyncHandler } from "../middlewares/asyncHandler.js";
 import { authService } from "../services/auth-service.js";
+import logger from "../utils/logger.js";
 
 export class AuthController {
   loginUser = asyncHandler(async (req: Request, res: Response) => {

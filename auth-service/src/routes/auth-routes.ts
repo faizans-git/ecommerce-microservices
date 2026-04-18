@@ -63,6 +63,7 @@ router.post(
   "/reset-password",
   passwordResetLimiter,
   validate(resetPasswordSchema),
+
   controller.resetPassword,
 );
 

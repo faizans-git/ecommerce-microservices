@@ -18,6 +18,8 @@ const PUBLIC_PATHS = [
   "/api/auth/login",
   "/api/auth/verify-otp",
   "/api/auth/resend-otp",
+  "/api/auth/forgot-password",
+  "/api/auth/reset-password",
 ];
 
 const optionalAuth = (req: Request, res: Response, next: NextFunction) => {
@@ -27,8 +29,8 @@ const optionalAuth = (req: Request, res: Response, next: NextFunction) => {
 
 const commonProxyOptions: Options<Request, Response> = {
   changeOrigin: true,
-  proxyTimeout: 5000,
-  timeout: 5000,
+  proxyTimeout: 50000,
+  timeout: 50000,
 
   on: {
     error: (err, req, res: any) => {

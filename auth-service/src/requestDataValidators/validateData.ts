@@ -28,15 +28,11 @@ export const logoutSchema = Joi.object({
 });
 
 export const forgotPasswordSchema = Joi.object({
-  body: Joi.object({
-    email: Joi.string().email(),
-  }),
+  email: Joi.string().email().required(),
 });
 
 export const resetPasswordSchema = Joi.object({
-  body: Joi.object({
-    email: Joi.string().email(),
-    token: Joi.string(),
-    newPassword: Joi.string().min(8).max(100).required(),
-  }),
+  email: Joi.string().email().required(),
+  token: Joi.string().required(),
+  newPassword: Joi.string().min(8).max(100).required(),
 });
