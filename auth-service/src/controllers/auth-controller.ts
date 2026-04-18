@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import { asyncHandler } from "../middlewares/asyncHandler.js";
 import { authService } from "../services/auth-service.js";
 import logger from "../utils/logger.js";
+import { AppError } from "../middlewares/errorHandler.js";
 
 export class AuthController {
   loginUser = asyncHandler(async (req: Request, res: Response) => {
@@ -60,6 +61,25 @@ export class AuthController {
     res
       .status(200)
       .json({ success: true, message: "Password reset successful" });
+  });
+
+  renewTokens = asyncHandler(async (req: Request, res: Response) => {
+    const token = req.cookies?.refreshToken ?? req.body.refreshToken;
+
+    if (!token) {
+      throw new AppError("Refresh token required", 401);
+    }
+
+    const { jwtToken, refreshToken } = await authService.renewTokens(token);
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(200).json({ success: true, accessToken: jwtToken });
   });
 }
 

@@ -20,6 +20,7 @@ const PUBLIC_PATHS = [
   "/api/auth/resend-otp",
   "/api/auth/forgot-password",
   "/api/auth/reset-password",
+  "/api/auth/refresh",
 ];
 
 const optionalAuth = (req: Request, res: Response, next: NextFunction) => {

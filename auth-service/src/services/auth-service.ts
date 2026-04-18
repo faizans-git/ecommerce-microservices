@@ -109,7 +109,36 @@ export class AuthService {
     const hashedPassword = await hashPassword(newPassword);
     await this.authRepo.updatePassword(email, hashedPassword);
 
-    await this.authRepo.deleteAllRefreshTokensByEmail(email);
+    await this.authRepo.deleteAllRefreshTokensById(user.id);
+  }
+  async renewTokens(token: string) {
+    const dbToken = await this.authRepo.getRefreshTokenByToken(token);
+
+    if (!dbToken) {
+      // Token not found — could be reuse of an already-rotated token
+      // Safest response: invalidate everything for that user if you can identify them
+      throw new AppError("Invalid or expired refresh token", 401);
+    }
+
+    if (dbToken.expiresAt < new Date()) {
+      await this.authRepo.deleteRefreshToken(dbToken.id);
+      throw new AppError("Session expired, please log in again", 401);
+    }
+
+    const user = await this.authRepo.findById(dbToken.userId);
+
+    if (!user) {
+      throw new AppError("User no longer exists", 401);
+    }
+
+    if (!user.isVerified) {
+      throw new AppError("Account not verified", 403);
+    }
+
+    // Rotate: delete used token, issue new pair
+    await this.authRepo.deleteRefreshToken(dbToken.id);
+
+    return generateTokens(user);
   }
 }
 

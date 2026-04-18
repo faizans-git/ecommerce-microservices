@@ -110,3 +110,10 @@ export const passwordResetLimiter = createRateLimiter({
   message: "Too many requests, try again later",
   prefix: "limit:auth:reset",
 });
+
+export const refreshTokenLimiter = createRateLimiter({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  message: "Too many requests, try again later",
+  prefix: "limit:auth:refreshtoken",
+});

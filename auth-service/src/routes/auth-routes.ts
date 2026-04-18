@@ -7,11 +7,13 @@ import {
   logoutLimiter,
   otpLimiter,
   passwordResetLimiter,
+  refreshTokenLimiter,
 } from "../middlewares/rateLimiter.js";
 import {
   forgotPasswordSchema,
   loginSchema,
   logoutSchema,
+  refreshTokenSchema,
   registerSchema,
   resendOtpSchema,
   resetPasswordSchema,
@@ -65,6 +67,13 @@ router.post(
   validate(resetPasswordSchema),
 
   controller.resetPassword,
+);
+
+router.post(
+  "/refresh",
+  refreshTokenLimiter,
+  validate(refreshTokenSchema),
+  controller.renewTokens,
 );
 
 export default router;

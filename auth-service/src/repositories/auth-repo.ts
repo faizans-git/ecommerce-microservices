@@ -15,6 +15,10 @@ export class AuthRepository {
     return prisma.user.create({ data });
   }
 
+  async getRefreshTokenByToken(token: string) {
+    return prisma.refreshToken.findFirst({ where: { token } });
+  }
+
   async markAsVerified(email: string) {
     try {
       return await prisma.user.update({
@@ -47,9 +51,15 @@ export class AuthRepository {
     });
   }
 
-  async deleteAllRefreshTokensByEmail(email: string) {
+  async deleteAllRefreshTokensById(userId: string) {
     return prisma.refreshToken.deleteMany({
-      where: { user: { email } },
+      where: { userId },
+    });
+  }
+
+  async deleteRefreshToken(id: string) {
+    return prisma.refreshToken.deleteMany({
+      where: { id },
     });
   }
 }
