@@ -115,8 +115,6 @@ export class AuthService {
     const dbToken = await this.authRepo.getRefreshTokenByToken(token);
 
     if (!dbToken) {
-      // Token not found — could be reuse of an already-rotated token
-      // Safest response: invalidate everything for that user if you can identify them
       throw new AppError("Invalid or expired refresh token", 401);
     }
 
@@ -135,7 +133,6 @@ export class AuthService {
       throw new AppError("Account not verified", 403);
     }
 
-    // Rotate: delete used token, issue new pair
     await this.authRepo.deleteRefreshToken(dbToken.id);
 
     return generateTokens(user);
