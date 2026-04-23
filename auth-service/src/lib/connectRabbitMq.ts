@@ -1,5 +1,5 @@
 import amqp from "amqplib";
-import logger from "./logger.js";
+import logger from "../utils/logger.js";
 
 const RECONNECT_DELAY_MS = 5000;
 const MAX_RECONNECT_ATTEMPTS = 10;
@@ -9,14 +9,21 @@ let reconnectAttempts = 0;
 let isConnecting = false;
 
 const rabbitmqUrl = process.env.RABBITMQ_URL;
-if (!rabbitmqUrl) throw new Error("RABBITMQ_URL is not defined");
+if (!rabbitmqUrl) {
+  throw new Error("RABBITMQ_URL is not defined");
+}
 
-async function setupChannel(conn: amqp.ChannelModel): Promise<amqp.Channel> {
-  const ch = await conn.createChannel();
+async function setupChannel(
+  connection: amqp.ChannelModel,
+): Promise<amqp.Channel> {
+  const ch = await connection.createChannel();
+
   await ch.prefetch(1);
 
   await ch.assertExchange("dlx.emails", "direct", { durable: true });
-  await ch.assertQueue("emails.dead", { durable: true });
+  await ch.assertQueue("emails.dead", {
+    durable: true,
+  });
   await ch.bindQueue("emails.dead", "dlx.emails", "emails");
 
   await ch.assertQueue("emails", {
@@ -24,16 +31,17 @@ async function setupChannel(conn: amqp.ChannelModel): Promise<amqp.Channel> {
     arguments: {
       "x-dead-letter-exchange": "dlx.emails",
       "x-dead-letter-routing-key": "emails",
-      "x-message-ttl": 86400000,
+      "x-message-ttl": 24 * 60 * 60 * 1000, // 24hr TTL
     },
   });
 
-  ch.on("error", (err: Error) => {
-    logger.error("Channel error", { message: err.message });
+  ch.on("error", (err) => {
+    logger.error("RabbitMQ channel error", { message: err.message });
     channel = null;
   });
+
   ch.on("close", () => {
-    logger.warn("Channel closed");
+    logger.warn("RabbitMQ channel closed");
     channel = null;
   });
 
@@ -43,17 +51,23 @@ async function setupChannel(conn: amqp.ChannelModel): Promise<amqp.Channel> {
 export async function connectRabbitMq(): Promise<void> {
   if (isConnecting) return;
   isConnecting = true;
+
   try {
-    const conn = await amqp.connect(rabbitmqUrl!);
-    conn.on("error", (err: Error) => {
+    const connection = await amqp.connect(rabbitmqUrl!);
+
+    connection.on("error", (err) => {
+      logger.error("RabbitMQ connection error", { message: err.message });
       channel = null;
       scheduleReconnect();
     });
-    conn.on("close", () => {
+
+    connection.on("close", () => {
+      logger.warn("RabbitMQ connection closed — reconnecting");
       channel = null;
       scheduleReconnect();
     });
-    channel = await setupChannel(conn);
+
+    channel = await setupChannel(connection);
     reconnectAttempts = 0;
     logger.info("RabbitMQ connected");
   } catch (err: any) {
@@ -66,17 +80,22 @@ export async function connectRabbitMq(): Promise<void> {
 
 function scheduleReconnect(): void {
   if (reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) {
-    logger.error("RabbitMQ max reconnect attempts reached");
+    logger.error("RabbitMQ max reconnect attempts reached — giving up");
     return;
   }
   reconnectAttempts++;
   const delay = Math.min(RECONNECT_DELAY_MS * reconnectAttempts, 30000);
-  logger.info(`Reconnecting in ${delay}ms (attempt ${reconnectAttempts})`);
+  logger.info(
+    `RabbitMQ reconnecting in ${delay}ms (attempt ${reconnectAttempts})`,
+  );
   setTimeout(connectRabbitMq, delay);
 }
 
-export const getChannel = (): amqp.Channel => {
+export function getChannel(): amqp.Channel {
   if (!channel) throw new Error("RabbitMQ channel unavailable");
   return channel;
-};
-export const isChannelReady = () => channel !== null;
+}
+
+export function isChannelReady(): boolean {
+  return channel !== null;
+}
