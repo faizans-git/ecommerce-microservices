@@ -1,4 +1,3 @@
-// routes/product-routes.ts
 import { Router, Request, Response, NextFunction } from "express";
 import { ProductController } from "../controllers/product-controller.js";
 import { validate } from "../middlewares/validateMiddleware.js";

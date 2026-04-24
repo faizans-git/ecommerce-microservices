@@ -1,0 +1,15 @@
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":0,"service":"auth-service","timestamp":"2026-04-24T13:06:41.192Z","to":"ma@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":1,"service":"auth-service","timestamp":"2026-04-24T13:06:44.401Z","to":"ma@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":2,"service":"auth-service","timestamp":"2026-04-24T13:06:47.678Z","to":"ma@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":3,"service":"auth-service","timestamp":"2026-04-24T13:06:53.544Z","to":"ma@gmail.com","type":"OTP_EMAIL"}
+{"level":"error","message":"Max retries reached, dead lettering","service":"auth-service","timestamp":"2026-04-24T13:06:53.544Z","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":0,"service":"auth-service","timestamp":"2026-04-24T13:07:15.119Z","to":"moa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":1,"service":"auth-service","timestamp":"2026-04-24T13:07:16.830Z","to":"moa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":2,"service":"auth-service","timestamp":"2026-04-24T13:07:19.630Z","to":"moa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":3,"service":"auth-service","timestamp":"2026-04-24T13:07:24.269Z","to":"moa@gmail.com","type":"OTP_EMAIL"}
+{"level":"error","message":"Max retries reached, dead lettering","service":"auth-service","timestamp":"2026-04-24T13:07:24.271Z","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":0,"service":"auth-service","timestamp":"2026-04-24T13:07:30.368Z","to":"mooa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":1,"service":"auth-service","timestamp":"2026-04-24T13:07:32.017Z","to":"mooa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":2,"service":"auth-service","timestamp":"2026-04-24T13:07:34.643Z","to":"mooa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":3,"service":"auth-service","timestamp":"2026-04-24T13:07:39.303Z","to":"mooa@gmail.com","type":"OTP_EMAIL"}
+{"level":"error","message":"Max retries reached, dead lettering","service":"auth-service","timestamp":"2026-04-24T13:07:39.304Z","type":"OTP_EMAIL"}
