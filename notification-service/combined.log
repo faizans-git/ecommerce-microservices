@@ -1,0 +1,40 @@
+{"level":"info","message":"RabbitMQ connected","service":"auth-service","timestamp":"2026-04-24T13:01:17.065Z"}
+{"level":"info","message":"Email consumer started","service":"auth-service","timestamp":"2026-04-24T13:01:17.069Z"}
+{"level":"info","message":"Notification service running on port 3005","service":"auth-service","timestamp":"2026-04-24T13:01:17.073Z"}
+{"level":"info","message":"RabbitMQ connected","service":"auth-service","timestamp":"2026-04-24T13:01:18.621Z"}
+{"level":"info","message":"Email consumer started","service":"auth-service","timestamp":"2026-04-24T13:01:18.626Z"}
+{"level":"info","message":"Notification service running on port 3005","service":"auth-service","timestamp":"2026-04-24T13:01:18.628Z"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":0,"service":"auth-service","timestamp":"2026-04-24T13:06:41.192Z","to":"ma@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":1,"service":"auth-service","timestamp":"2026-04-24T13:06:44.401Z","to":"ma@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":2,"service":"auth-service","timestamp":"2026-04-24T13:06:47.678Z","to":"ma@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":3,"service":"auth-service","timestamp":"2026-04-24T13:06:53.544Z","to":"ma@gmail.com","type":"OTP_EMAIL"}
+{"level":"error","message":"Max retries reached, dead lettering","service":"auth-service","timestamp":"2026-04-24T13:06:53.544Z","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":0,"service":"auth-service","timestamp":"2026-04-24T13:07:15.119Z","to":"moa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":1,"service":"auth-service","timestamp":"2026-04-24T13:07:16.830Z","to":"moa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":2,"service":"auth-service","timestamp":"2026-04-24T13:07:19.630Z","to":"moa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":3,"service":"auth-service","timestamp":"2026-04-24T13:07:24.269Z","to":"moa@gmail.com","type":"OTP_EMAIL"}
+{"level":"error","message":"Max retries reached, dead lettering","service":"auth-service","timestamp":"2026-04-24T13:07:24.271Z","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":0,"service":"auth-service","timestamp":"2026-04-24T13:07:30.368Z","to":"mooa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":1,"service":"auth-service","timestamp":"2026-04-24T13:07:32.017Z","to":"mooa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":2,"service":"auth-service","timestamp":"2026-04-24T13:07:34.643Z","to":"mooa@gmail.com","type":"OTP_EMAIL"}
+{"error":"Missing credentials for \"PLAIN\"","level":"error","message":"Email send failed","retries":3,"service":"auth-service","timestamp":"2026-04-24T13:07:39.303Z","to":"mooa@gmail.com","type":"OTP_EMAIL"}
+{"level":"error","message":"Max retries reached, dead lettering","service":"auth-service","timestamp":"2026-04-24T13:07:39.304Z","type":"OTP_EMAIL"}
+{"level":"info","message":"SIGINT received — shutting down","service":"auth-service","timestamp":"2026-04-24T14:40:39.174Z"}
+{"level":"info","message":"RabbitMQ connected","service":"auth-service","timestamp":"2026-04-24T14:48:07.494Z"}
+{"level":"info","message":"Email consumer started","service":"auth-service","timestamp":"2026-04-24T14:48:07.501Z"}
+{"level":"info","message":"Notification service running on port 3005","service":"auth-service","timestamp":"2026-04-24T14:48:07.506Z"}
+{"level":"info","message":"RabbitMQ connected","service":"auth-service","timestamp":"2026-04-24T14:48:09.861Z"}
+{"level":"info","message":"Email consumer started","service":"auth-service","timestamp":"2026-04-24T14:48:09.867Z"}
+{"level":"info","message":"Notification service running on port 3005","service":"auth-service","timestamp":"2026-04-24T14:48:09.870Z"}
+{"level":"info","message":"Email sent","service":"auth-service","timestamp":"2026-04-24T14:49:08.225Z","to":"subbu24656@gmail.com","type":"OTP_EMAIL"}
+{"level":"info","message":"Email sent","service":"auth-service","timestamp":"2026-04-24T14:49:35.683Z","to":"subbu@gmail.com","type":"OTP_EMAIL"}
+{"level":"info","message":"Email sent","service":"auth-service","timestamp":"2026-04-24T14:51:53.385Z","to":"sub@gmail.com","type":"OTP_EMAIL"}
+{"level":"info","message":"Email sent","service":"auth-service","timestamp":"2026-04-24T14:52:23.990Z","to":"sb@gmail.com","type":"OTP_EMAIL"}
+{"level":"info","message":"SIGINT received — shutting down","service":"auth-service","timestamp":"2026-04-24T14:55:31.481Z"}
+{"level":"info","message":"RabbitMQ connected","service":"auth-service","timestamp":"2026-04-24T16:39:54.974Z"}
+{"level":"info","message":"Email consumer started","service":"auth-service","timestamp":"2026-04-24T16:39:54.979Z"}
+{"level":"info","message":"Notification service running on port 3005","service":"auth-service","timestamp":"2026-04-24T16:39:54.982Z"}
+{"level":"info","message":"RabbitMQ connected","service":"auth-service","timestamp":"2026-04-24T16:39:57.906Z"}
+{"level":"info","message":"Email consumer started","service":"auth-service","timestamp":"2026-04-24T16:39:57.910Z"}
+{"level":"info","message":"Notification service running on port 3005","service":"auth-service","timestamp":"2026-04-24T16:39:57.913Z"}
+{"level":"info","message":"Email sent","service":"auth-service","timestamp":"2026-04-24T16:40:01.032Z","to":"faixandisjoint@gmail.com","type":"PASSWORD_RESET_EMAIL"}

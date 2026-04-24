@@ -37,7 +37,7 @@ export const gatewayAuth = (
 };
 
 export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-  if (req.user?.role !== "Admin") {
+  if (req.user?.role !== "ADMIN") {
     logger.warn(
       `Unauthorized person tried to access admin only feature user:${req.user?.userId}`,
     );

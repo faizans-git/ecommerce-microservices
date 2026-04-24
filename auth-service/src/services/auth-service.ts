@@ -9,6 +9,7 @@ import {
   generateResetToken,
   verifyResetToken,
 } from "../lib/passwordResetToken.js";
+import { publishEmailEvent } from "../producers/email.producer.js";
 
 export class AuthService {
   constructor(private authRepo: AuthRepository) {}
@@ -39,15 +40,19 @@ export class AuthService {
     }
 
     const hashedPassword = await hashPassword(data.password);
+    const email = data.email;
     const user = await this.authRepo.create({
       username: data.username,
-      email: data.email,
+      email,
       password: hashedPassword,
     });
 
     try {
       const otp = await generateOtp(data.email);
-      await sendOtpEmail(data.email, otp);
+      await publishEmailEvent({
+        type: "OTP_EMAIL",
+        payload: { email, otp },
+      });
     } catch (err) {
       await this.authRepo.deleteByEmail(data.email);
       throw new AppError("Failed to send verification email", 500);
@@ -75,7 +80,10 @@ export class AuthService {
     }
     await invalidateOtp(email);
     const otp = await generateOtp(email);
-    await sendOtpEmail(email, otp);
+    await publishEmailEvent({
+      type: "OTP_EMAIL",
+      payload: { email, otp },
+    });
   }
 
   async forgotPassword(email: string): Promise<void> {
@@ -87,7 +95,10 @@ export class AuthService {
 
     const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${rawToken}&email=${encodeURIComponent(email)}`;
 
-    await sendPasswordResetEmail(email, resetUrl);
+    await publishEmailEvent({
+      type: "PASSWORD_RESET_EMAIL",
+      payload: { email, resetUrl },
+    });
   }
 
   async resetPassword(
