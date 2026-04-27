@@ -336,3 +336,36 @@
 {"level":"info","message":"Auth service running at 3001","service":"auth-service","timestamp":"2026-04-11T13:56:05.577Z"}
 {"level":"info","message":"Redis connected","service":"auth-service","timestamp":"2026-04-11T13:56:05.614Z"}
 {"level":"info","message":"Redis ready","service":"auth-service","timestamp":"2026-04-11T13:56:05.622Z"}
+{"level":"info","message":"Redis connected","service":"auth-service","timestamp":"2026-04-24T18:31:05.539Z"}
+{"level":"info","message":"Redis ready","service":"auth-service","timestamp":"2026-04-24T18:31:05.551Z"}
+{"level":"info","message":"Database connected","service":"auth-service","timestamp":"2026-04-24T18:31:05.695Z"}
+{"level":"info","message":"RabbitMQ connected","service":"auth-service","timestamp":"2026-04-24T18:31:06.014Z"}
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2026-04-24T18:31:06.017Z"}
+{"level":"info","message":"Redis connected","service":"auth-service","timestamp":"2026-04-24T18:31:15.549Z"}
+{"level":"info","message":"Redis ready","service":"auth-service","timestamp":"2026-04-24T18:31:15.564Z"}
+{"level":"info","message":"Redis connected","service":"auth-service","timestamp":"2026-04-24T18:31:20.192Z"}
+{"level":"info","message":"Redis ready","service":"auth-service","timestamp":"2026-04-24T18:31:20.210Z"}
+{"level":"info","message":"Database connected","service":"auth-service","timestamp":"2026-04-24T18:31:20.390Z"}
+{"level":"info","message":"RabbitMQ connected","service":"auth-service","timestamp":"2026-04-24T18:31:20.619Z"}
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2026-04-24T18:31:20.623Z"}
+{"level":"info","message":"Tokens generated for user cmnynao3y0001f5gnbcvx6xk9","service":"auth-service","timestamp":"2026-04-24T18:31:46.284Z"}
+{"level":"info","message":"SIGINT received — shutting down","service":"auth-service","timestamp":"2026-04-25T06:13:25.039Z"}
+{"level":"info","message":"Redis connected","service":"auth-service","timestamp":"2026-04-25T11:57:57.638Z"}
+{"level":"info","message":"Redis ready","service":"auth-service","timestamp":"2026-04-25T11:57:57.652Z"}
+{"level":"info","message":"Database connected","service":"auth-service","timestamp":"2026-04-25T11:57:57.747Z"}
+{"level":"info","message":"RabbitMQ connected","service":"auth-service","timestamp":"2026-04-25T11:57:58.216Z"}
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2026-04-25T11:57:58.228Z"}
+{"level":"info","message":"Redis connected","service":"auth-service","timestamp":"2026-04-25T11:58:03.613Z"}
+{"level":"info","message":"Redis ready","service":"auth-service","timestamp":"2026-04-25T11:58:03.625Z"}
+{"level":"info","message":"Database connected","service":"auth-service","timestamp":"2026-04-25T11:58:03.892Z"}
+{"level":"info","message":"Redis connected","service":"auth-service","timestamp":"2026-04-25T11:58:04.980Z"}
+{"level":"info","message":"Redis ready","service":"auth-service","timestamp":"2026-04-25T11:58:04.989Z"}
+{"level":"info","message":"Database connected","service":"auth-service","timestamp":"2026-04-25T11:58:05.070Z"}
+{"level":"info","message":"RabbitMQ connected","service":"auth-service","timestamp":"2026-04-25T11:58:05.122Z"}
+{"level":"info","message":"Auth service running on port 3001","service":"auth-service","timestamp":"2026-04-25T11:58:05.125Z"}
+{"level":"info","message":"Tokens generated for user cmnynao3y0001f5gnbcvx6xk9","service":"auth-service","timestamp":"2026-04-25T11:58:38.631Z"}
+{"level":"info","message":"Tokens generated for user cmnynao3y0001f5gnbcvx6xk9","service":"auth-service","timestamp":"2026-04-25T12:09:05.489Z"}
+{"level":"info","message":"Tokens generated for user cmnynao3y0001f5gnbcvx6xk9","service":"auth-service","timestamp":"2026-04-25T12:09:09.954Z"}
+{"level":"info","message":"Tokens generated for user cmnynao3y0001f5gnbcvx6xk9","service":"auth-service","timestamp":"2026-04-25T15:15:46.718Z"}
+{"level":"info","message":"Tokens generated for user cmnynao3y0001f5gnbcvx6xk9","service":"auth-service","timestamp":"2026-04-25T16:41:29.628Z"}
+{"level":"info","message":"SIGINT received — shutting down","service":"auth-service","timestamp":"2026-04-25T17:46:57.032Z"}
