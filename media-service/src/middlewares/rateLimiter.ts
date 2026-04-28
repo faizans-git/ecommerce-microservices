@@ -1,7 +1,7 @@
 import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import { RedisStore, RedisReply } from "rate-limit-redis";
 import { Request, Response, NextFunction } from "express";
-import redisClient from "../lib/db/redis.js";
+import redisClient from "../lib/redis.js";
 import logger from "../lib/logger.js";
 import { AppError } from "./errorMiddleware.js";
 
@@ -76,36 +76,8 @@ export const createRateLimiter = (options: RateLimiterOptions) => {
   };
 };
 
-export const generalLimiter = createRateLimiter({
+export const uploadLimiter = createRateLimiter({
   windowMs: 15 * 60 * 1000,
   max: 100,
   prefix: "general",
-});
-
-export const productReadLimiter = createRateLimiter({
-  windowMs: 60 * 1000,
-  max: 60,
-  prefix: "limit:product:read",
-  message: "Too many read requests. Try again later.",
-});
-
-export const productWriteLimiter = createRateLimiter({
-  windowMs: 60 * 1000,
-  max: 30,
-  prefix: "limit:product:write",
-  message: "Too many write requests. Try again later.",
-});
-
-export const productMutateLimiter = createRateLimiter({
-  windowMs: 60 * 1000,
-  max: 30,
-  prefix: "limit:product:mutate",
-  message: "Too many requests. Try again later.",
-});
-
-export const productDeleteLimiter = createRateLimiter({
-  windowMs: 60 * 1000,
-  max: 30,
-  prefix: "limit:product:delete",
-  message: "Too many delete requests. Try again later.",
 });
