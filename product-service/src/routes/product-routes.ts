@@ -4,6 +4,8 @@ import { validate } from "../middlewares/validateMiddleware.js";
 import {
   createProductSchema,
   getAllProductsSchema,
+  getVariantsBatchSchema,
+  reserveStockSchema,
   updateProductSchema,
 } from "../validators/productValidator.js";
 import { gatewayAuth, isAdmin } from "../middlewares/authMiddleware.js";
@@ -44,18 +46,21 @@ router.post(
   "/variants/batch",
   internalAuth,
   productReadLimiter,
+  validate(getVariantsBatchSchema),
   controller.getVariantsBatch,
 );
 router.post(
   "/stock/reserve",
   internalAuth,
   productMutateLimiter,
+  validate(reserveStockSchema),
   controller.reserveStock,
 );
 router.post(
   "/stock/release",
   internalAuth,
   productMutateLimiter,
+  validate(reserveStockSchema),
   controller.releaseStock,
 );
 

@@ -69,3 +69,21 @@ export const updateProductSchema = Joi.object({
     )
     .optional(),
 });
+
+export const getVariantsBatchSchema = Joi.object({
+  variantIds: Joi.array()
+    .items(Joi.string().trim().required())
+    .min(1)
+    .max(100)
+    .required(),
+});
+
+export const reserveStockSchema = Joi.object({
+  variantId: Joi.string().trim().required(),
+  quantity: Joi.number().integer().min(1).required(),
+});
+
+export const releaseStockSchema = Joi.object({
+  variantId: Joi.string().trim().required(),
+  quantity: Joi.number().integer().min(1).required(),
+});
