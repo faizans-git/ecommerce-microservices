@@ -13,6 +13,7 @@ export class ProductRepository {
     description: true,
     slug: true,
     basePrice: true,
+    deletedAt: true,
     category: { select: { id: true, name: true } },
     images: {
       select: { url: true, altText: true, sortOrder: true },
@@ -151,10 +152,14 @@ export class ProductRepository {
 
   async getProductById(id: string) {
     try {
-      return await prisma.product.findFirst({
-        where: { id, deletedAt: null },
+      const product = await prisma.product.findUnique({
+        where: { id },
         select: this.detailSelect,
       });
+      if (!product || product.deletedAt !== null) {
+        return null;
+      }
+      return product;
     } catch (error) {
       throw mapPrismaError(error);
     }

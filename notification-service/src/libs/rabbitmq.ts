@@ -13,7 +13,7 @@ if (!rabbitmqUrl) throw new Error("RABBITMQ_URL is not defined");
 
 async function setupChannel(conn: amqp.ChannelModel): Promise<amqp.Channel> {
   const ch = await conn.createChannel();
-  await ch.prefetch(1);
+  await ch.prefetch(5);
 
   await ch.assertExchange("dlx.emails", "direct", { durable: true });
   await ch.assertQueue("emails.dead", { durable: true });

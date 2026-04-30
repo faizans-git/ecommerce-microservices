@@ -29,9 +29,6 @@ export class ProductService {
   }
 
   async createProduct(data: ProductDTO) {
-    const existing = await this.repo.existsBySlug(data.slug);
-    if (existing) throw new AppError("Product slug already exists", 400);
-
     const created = await this.repo.createProduct(data);
     await cache.deletePattern("products:list:*");
     return created;
