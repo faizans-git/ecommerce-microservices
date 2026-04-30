@@ -71,6 +71,7 @@ router.post(
 router.delete(
   "/:id",
   gatewayAuth,
+  isAdmin,
   productDeleteLimiter,
   controller.deleteProduct,
 );
