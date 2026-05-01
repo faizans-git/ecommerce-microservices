@@ -1,8 +1,11 @@
-// services/order-service.ts
 import { cache } from "../lib/cacheHelper.js";
 import { AppError } from "../middlewares/errorMiddleware.js";
 import { orderRepository } from "../repositories/order-repository.js";
-import { getVariantsByIds } from "../lib/productServiceClient.js";
+import {
+  getVariantsByIds,
+  reserveStock,
+  releaseStock,
+} from "../lib/productServiceClient.js";
 import logger from "../lib/logger.js";
 import {
   CreateOrderDTO,
@@ -30,29 +33,40 @@ export class OrderService {
     if (orderId) ops.push(cache.del(`order:${orderId}`));
     await Promise.all(ops);
   }
+  // look for edge cases and potenntial errors
+
+  private async releaseOrderItems(
+    items: { variantId: string; quantity: number }[],
+    context: string,
+  ): Promise<void> {
+    await Promise.allSettled(
+      items.map(({ variantId, quantity }) =>
+        releaseStock(variantId, quantity).catch((err) =>
+          logger.error("Failed to release stock", { variantId, context, err }),
+        ),
+      ),
+    );
+  }
 
   async createOrder(
     userId: string,
     body: CreateOrderDTO,
   ): Promise<PrismaOrderWithItems> {
     const variantIds = body.items.map((i) => i.variantId);
-
     const variantMap = await getVariantsByIds(variantIds);
 
+    // Validate all items first before touching stock
     const resolvedItems: CreateOrderItemResolved[] = body.items.map((item) => {
       const variant = variantMap.get(item.variantId);
-
       if (!variant) {
-        throw new AppError(`Product variant ${item.variantId} not found`, 404);
+        throw new AppError(`Variant ${item.variantId} not found`, 404);
       }
-
       if (variant.stock < item.quantity) {
         throw new AppError(
           `Insufficient stock for variant ${item.variantId}`,
           400,
         );
       }
-
       return {
         variantId: item.variantId,
         quantity: item.quantity,
@@ -60,21 +74,56 @@ export class OrderService {
       };
     });
 
-    const totalAmount = resolvedItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0,
-    );
+    // Reserve stock one by one — track what succeeded for rollback
+    const reserved: { variantId: string; quantity: number }[] = [];
 
-    const order = await orderRepository.create({
-      userId,
-      status: OrderStatus.PENDING,
-      items: resolvedItems,
-      shippingAddress: body.shippingAddress,
-      totalAmount,
-    });
+    for (const item of resolvedItems) {
+      const success = await reserveStock(item.variantId, item.quantity);
+
+      if (!success) {
+        // This item failed — roll back everything reserved so far
+        logger.warn("Stock reservation failed, rolling back", {
+          failedVariantId: item.variantId,
+          reservedSoFar: reserved,
+        });
+        await this.releaseOrderItems(reserved, "createOrder-rollback");
+        throw new AppError(
+          `Insufficient stock for variant ${item.variantId}`,
+          400,
+        );
+      }
+
+      reserved.push({ variantId: item.variantId, quantity: item.quantity });
+    }
+
+    // All stock reserved — now persist the order
+    // If DB write fails, roll back stock
+    let order: PrismaOrderWithItems;
+    try {
+      const totalAmount = resolvedItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0,
+      );
+
+      order = await orderRepository.create({
+        userId,
+        status: OrderStatus.PENDING,
+        items: resolvedItems,
+        shippingAddress: body.shippingAddress,
+        totalAmount,
+      });
+    } catch (err) {
+      logger.error("Order DB write failed, rolling back stock", { err });
+      await this.releaseOrderItems(reserved, "createOrder-db-failure");
+      throw err;
+    }
 
     await this.invalidateUserOrderCache(userId);
-    logger.info("Order created", { userId, orderId: order.id, totalAmount });
+    logger.info("Order created", {
+      userId,
+      orderId: order.id,
+      itemCount: resolvedItems.length,
+    });
 
     return order;
   }
@@ -126,6 +175,15 @@ export class OrderService {
       OrderStatus.CANCELLED,
     );
 
+    // Release stock after DB is updated — best effort
+    await this.releaseOrderItems(
+      order.items.map((i) => ({
+        variantId: i.variantId,
+        quantity: i.quantity,
+      })),
+      `cancelOrder:${orderId}`,
+    );
+
     await this.invalidateUserOrderCache(order.userId, orderId);
     logger.info("Order cancelled", { userId, orderId });
     return updated;
@@ -139,6 +197,16 @@ export class OrderService {
     if (!order) throw new AppError("Order not found", 404);
 
     const updated = await orderRepository.updateStatus(orderId, status);
+
+    if (status === OrderStatus.CANCELLED) {
+      await this.releaseOrderItems(
+        order.items.map((i) => ({
+          variantId: i.variantId,
+          quantity: i.quantity,
+        })),
+        `updateStatus-cancelled:${orderId}`,
+      );
+    }
 
     await this.invalidateUserOrderCache(order.userId, orderId);
     logger.info("Order status updated", {
